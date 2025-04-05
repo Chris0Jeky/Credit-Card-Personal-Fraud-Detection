@@ -105,3 +105,8 @@ def simulate_transactions(account_details, source_df, num_transactions):
             # Add customer location at time of transaction (same as home for simplicity now)
             new_trans['lat'] = account_details['lat']
             new_trans['long'] = account_details['long']
+
+            # Add other account fields if they exist as columns in the original dataset schema
+            for key in ['gender', 'city', 'state', 'zip', 'job', 'dob', 'city_pop']:
+                if key in source_df.columns:  # Only add if it's an expected column
+                    new_trans[key] = account_details[key]
