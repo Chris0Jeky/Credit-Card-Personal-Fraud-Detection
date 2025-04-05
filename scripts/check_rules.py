@@ -64,7 +64,10 @@ def check_transaction_rules(transaction_row, account_details, recent_transaction
             transaction_row['merch_lat'], transaction_row['merch_long'],
             account_lat, account_lon
         )
-        
+        if distance > LOCATION_THRESHOLD_KM:
+            flags.append(f"RULE_VIOLATION:LOCATION_FAR_FROM_HOME ({distance:.0f}km > {LOCATION_THRESHOLD_KM}km)")
+        else:
+            flags.append("INFO:Missing_Coordinates_For_Location_Check")
 
 
 
