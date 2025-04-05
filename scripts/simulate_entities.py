@@ -145,3 +145,7 @@ def simulate_transactions(account_details, source_df, num_transactions):
         # 1. Ensure output directory exists
         OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
         print(f"Output directory: {OUTPUT_DIR.resolve()}")
+
+        # 2. Create simulated account
+        print("Creating simulated account...")
+        account = create_simulated_account()
