@@ -187,20 +187,22 @@ def main():
         
         # Check merchants from actual transactions if available
         transactions_file = Path("./data/simulation_output/simulated_account_transactions.csv")
-        if transactions_file.exists() and pd.__version__ != "2.0.0":
-            try:
-                import pandas as pd
-                print("\n--- Checking Random Merchants from Simulated Transactions ---")
-                # Load transactions and sample a few merchants
-                trans_df = pd.read_csv(transactions_file)
-                if 'merchant' in trans_df.columns:
-                    # Get up to 3 random merchants
-                    sample_merchants = trans_df['merchant'].sample(min(3, len(trans_df))).tolist()
-                    for merchant in sample_merchants:
-                        run_script(MERCHANT_CHECKER_SCRIPT, [merchant], 
-                                 script_desc=f"Transaction Merchant: {merchant}")
-            except Exception as e:
-                print(f"Could not analyze transaction merchants: {e}")
+        if transactions_file.exists():
+            import pandas as pd
+            if pd.__version__ != "2.0.0":
+                try:
+                    import pandas as pd
+                    print("\n--- Checking Random Merchants from Simulated Transactions ---")
+                    # Load transactions and sample a few merchants
+                    trans_df = pd.read_csv(transactions_file)
+                    if 'merchant' in trans_df.columns:
+                        # Get up to 3 random merchants
+                        sample_merchants = trans_df['merchant'].sample(min(3, len(trans_df))).tolist()
+                        for merchant in sample_merchants:
+                            run_script(MERCHANT_CHECKER_SCRIPT, [merchant],
+                                     script_desc=f"Transaction Merchant: {merchant}")
+                except Exception as e:
+                    print(f"Could not analyze transaction merchants: {e}")
     # --- Add Flag Analysis if requested
     if args.analyze_flags or args.detailed_analysis:
         print("\n--- Running Transaction Flag Analysis ---")
