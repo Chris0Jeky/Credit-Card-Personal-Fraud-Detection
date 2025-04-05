@@ -1,0 +1,76 @@
+{
+  "summary": {
+    "total_transactions": 75,
+    "flagged_transactions": 75,
+    "percentage_flagged": 100.0
+  },
+  "rule_violations": {
+    "total_violations": 124,
+    "unique_violation_types": 2,
+    "violation_counts": {
+      "LOCATION_FAR_FROM_HOME": 75,
+      "HIGH_VELOCITY_RECENT_ACCOUNT": 49
+    }
+  },
+  "time_analysis": {
+    "days_with_transactions": 10,
+    "daily_flag_counts": {
+      "2023-06-16": 3,
+      "2023-06-17": 8,
+      "2023-06-18": 7,
+      "2023-06-19": 10,
+      "2023-06-20": 7,
+      "2023-06-21": 6,
+      "2023-06-22": 11,
+      "2023-06-23": 8,
+      "2023-06-24": 8,
+      "2023-06-25": 7
+    }
+  },
+  "amount_analysis": {
+    "flagged_transactions": {
+      "mean": 60.44,
+      "median": 47.45,
+      "min": 1.88,
+      "max": 309.54
+    },
+    "unflagged_transactions": {
+      "mean": 0,
+      "median": 0,
+      "min": 0,
+      "max": 0
+    }
+  },
+  "merchant_analysis": {
+    "unique_merchants": 73,
+    "top_flagged_merchants": {
+      "fraud_Zemlak, Tillman and Cremin": 2,
+      "fraud_Pfeffer LLC": 2,
+      "fraud_Bartoletti and Sons": 1,
+      "fraud_Bahringer-Streich": 1,
+      "fraud_Boehm, Block and Jakubowski": 1
+    }
+  },
+  "fraud_label_analysis": {
+    "fraud_transactions": 0,
+    "fraud_flag_match": {
+      "0": 75
+    }
+  },
+  "co_occurring_rules": {
+    "count": 1,
+    "top_pairs": {
+      "HIGH_VELOCITY_RECENT_ACCOUNT & LOCATION_FAR_FROM_HOME": 49
+    }
+  },
+  "velocity_analysis": {
+    "mean_time_between_trans_mins": 183.5,
+    "median_time_between_trans_mins": 175.03,
+    "transactions_under_5_mins_apart": 1,
+    "transactions_under_60_mins_apart": 9,
+    "quick_succession_details": {
+      "count": 1,
+      "percentage": 1.33
+    }
+  }
+}
