@@ -128,3 +128,10 @@ def main():
         print(f"Error loading or processing transactions: {e}")
         return
 
+    # 3. Apply rules transaction by transaction
+    print("\nApplying rules to transactions...")
+    flagged_count = 0
+    all_timestamps = transactions_df['trans_ts'].dropna().tolist()  # List of all valid timestamps
+
+    
+
