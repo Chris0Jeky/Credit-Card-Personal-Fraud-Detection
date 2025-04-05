@@ -135,5 +135,14 @@ def main():
 
     results = []  # Store results for potential later use
 
-    
+    for index, transaction in transactions_df.iterrows():
+        # Get timestamps relevant for velocity check (up to current transaction)
+        relevant_timestamps = [ts for ts in all_timestamps if ts < transaction['trans_ts']]
+
+        flags = check_transaction_rules(transaction, account_details, relevant_timestamps)
+
+        result_data = transaction.to_dict()
+        result_data['rule_flags'] = flags
+
+        results.append(result_data)
 
