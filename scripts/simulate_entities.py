@@ -110,3 +110,11 @@ def simulate_transactions(account_details, source_df, num_transactions):
             for key in ['gender', 'city', 'state', 'zip', 'job', 'dob', 'city_pop']:
                 if key in source_df.columns:  # Only add if it's an expected column
                     new_trans[key] = account_details[key]
+
+            # Generate new transaction time & ID
+            # Add variable time delta: seconds to hours
+            time_delta_seconds = random.randint(30, 6 * 60 * 60)  # 30 seconds to 6 hours
+            current_trans_time += timedelta(seconds=time_delta_seconds)
+            new_trans['trans_date_trans_time'] = current_trans_time.strftime("%Y-%m-%d %H:%M:%S")
+            new_trans['unix_time'] = int(current_trans_time.timestamp())
+            new_trans['trans_num'] = f"sim_{fake.uuid4()}"  # Mark as simulated
