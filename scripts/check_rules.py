@@ -27,3 +27,14 @@ def calculate_distance(lat1, lon1, lat2, lon2):
         print(f"Warning: Invalid coordinates for distance calculation ({lat1},{lon1}) to ({lat2},{lon2})")
         return float('inf') # Indicate calculation error
 
+def check_transaction_rules(transaction_row, account_details, recent_transactions):
+    """
+    Applies rules to a single transaction.
+    `recent_transactions` is a list of timestamps from the last 24h for velocity checks.
+    """
+    flags = []
+    account_lat = account_details.get('lat')
+    account_lon = account_details.get('long')
+    account_creation_str = account_details.get('account_creation_date')
+
+
