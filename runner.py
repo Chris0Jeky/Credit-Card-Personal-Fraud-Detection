@@ -188,7 +188,20 @@ def main():
                                  script_desc=f"Transaction Merchant: {merchant}")
             except Exception as e:
                 print(f"Could not analyze transaction merchants: {e}")
-    # --- End Merchant Checking ---
+    # --- Add Flag Analysis if requested
+    if args.analyze_flags or args.detailed_analysis:
+        print("\n--- Running Transaction Flag Analysis ---")
+        flagged_file = Path("./data/simulation_output/simulated_transactions_with_flags.csv")
+        if flagged_file.exists():
+            analysis_args = []
+            if args.detailed_analysis:
+                analysis_args.append("--detailed")
+            run_script(ANALYZE_FLAGS_SCRIPT, analysis_args, script_desc="Flag Analysis")
+        else:
+            print(f"Cannot run analysis: File not found at {flagged_file}")
+            print("Please run rule checking step first to generate flagged transactions.")
+
+    # --- End of Flag Analysis
 
     workflow_end_time = time.time()
     print("\n=============================================")
