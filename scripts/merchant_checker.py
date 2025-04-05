@@ -7,7 +7,8 @@ try:
     from thefuzz import process
     FUZZY_MATCHING_AVAILABLE = True
 except ImportError:
-    print("Note: thefuzz library not available. Install with 'pip install thefuzz' for fuzzy matching.")
+    print("Note: thefuzz library not available. Install with 'pip install thefuzz python-Levenshtein' for fuzzy matching.")
+    print("     This will enable better merchant name matching using fuzzy string comparison.")
     FUZZY_MATCHING_AVAILABLE = False
 
 LEGIT_COMPANIES_FILE = Path(__file__).parent.parent / "data" / "legit_companies.txt"
