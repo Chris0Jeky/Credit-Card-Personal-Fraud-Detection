@@ -71,14 +71,22 @@ def main():
         sys.exit(1)
 
     # Perform the check
-    is_legit = check_merchant(args.merchant_name, legit_company_set)
+    is_legit, details = check_merchant(args.merchant_name, legit_company_set)
 
     # Output the result
     if is_legit:
-        print(f"Result: Merchant '{args.merchant_name}' appears to be on the known legitimate list.")
+        print(f"Result: Merchant '{args.merchant_name}' appears to be LEGITIMATE")
+        print(f"Details: {details}")
     else:
-        print(f"Result: Merchant '{args.merchant_name}' NOT found on the known legitimate list.")
-        # You could add fuzzy match suggestions here if using that option
+        print(f"Result: Merchant '{args.merchant_name}' appears to be SUSPICIOUS")
+        print(f"Details: {details}")
+        
+        # If fuzzy matching is available but no match was found, suggest closest matches
+        if FUZZY_MATCHING_AVAILABLE and "No match found" in details:
+            print("\nSuggestions for closest matches in our database:")
+            suggestions = process.extract(args.merchant_name, legit_company_set, limit=3)
+            for name, score in suggestions:
+                print(f"  '{name}' (similarity: {score}%)")
 
 if __name__ == "__main__":
     main()
