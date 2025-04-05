@@ -9,4 +9,8 @@ from datetime import datetime, timedelta
 # Path to the dataset we'll sample transaction patterns from
 SOURCE_DATASET_PATH = Path("./Datasets/Credit Card Transactions Fraud Detection Dataset/fraudTrain.csv")
 # Directory to save the simulated data
-OUTPUT_DIR = Path("./data/simulation_output")
+OUTPUT_DIR = Path("../data/simulation_output")
+
+# Files to save
+ACCOUNT_DETAILS_FILE = OUTPUT_DIR / "simulated_account_details.json"
+TRANSACTIONS_FILE = OUTPUT_DIR / "simulated_account_transactions.csv"
