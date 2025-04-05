@@ -96,3 +96,12 @@ def simulate_transactions(account_details, source_df, num_transactions):
         # Copy relevant fields from the source transaction
         for col in cols_to_keep:
             new_trans[col] = source_row[col]
+
+            # Overwrite/Add customer and transaction-specific details
+            new_trans['account_id'] = account_details['account_id']  # Link to account
+            new_trans['cc_num'] = account_details['cc_num']
+            new_trans['first'] = account_details['first']  # Add customer name for context if needed
+            new_trans['last'] = account_details['last']
+            # Add customer location at time of transaction (same as home for simplicity now)
+            new_trans['lat'] = account_details['lat']
+            new_trans['long'] = account_details['long']
