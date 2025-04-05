@@ -142,4 +142,6 @@ def simulate_transactions(account_details, source_df, num_transactions):
         """Main simulation logic."""
         print("--- Starting Entity Simulation ---")
 
-        
+        # 1. Ensure output directory exists
+        OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+        print(f"Output directory: {OUTPUT_DIR.resolve()}")
