@@ -43,4 +43,5 @@ def create_simulated_account():
     except Exception:
         pass  # Keep defaults if parsing fails
 
-    
+    creation_delta_days = random.randint(MIN_ACCOUNT_AGE_DAYS, MAX_ACCOUNT_AGE_DAYS)
+    account_creation_date = datetime.now() - timedelta(days=creation_delta_days)
