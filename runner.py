@@ -79,6 +79,16 @@ def parse_arguments():
         type=str,
         help="Check a specific merchant name against the legitimate list"
     )
+    parser.add_argument(
+        "--analyze-flags", 
+        action="store_true",
+        help="Run the flag analysis script"
+    )
+    parser.add_argument(
+        "--detailed-analysis", 
+        action="store_true",
+        help="Include detailed statistics in flag analysis"
+    )
     return parser.parse_args()
 
 def main():
