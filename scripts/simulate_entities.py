@@ -149,3 +149,12 @@ def simulate_transactions(account_details, source_df, num_transactions):
         # 2. Create simulated account
         print("Creating simulated account...")
         account = create_simulated_account()
+
+        # Save account details
+        try:
+            with open(ACCOUNT_DETAILS_FILE, 'w') as f:
+                json.dump(account, f, indent=4)
+            print(f"   Account details saved to {ACCOUNT_DETAILS_FILE.name}")
+        except Exception as e:
+            print(f"Error saving account details: {e}")
+            return  # Stop if we can't save account
