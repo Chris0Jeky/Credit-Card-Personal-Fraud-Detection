@@ -65,3 +65,9 @@ def create_simulated_account():
         "email": profile.get('mail', fake.email()),
         # Add any other fields you might want to simulate
     }
+    print(f"   Simulated Account Details:")
+    print(f"     ID: {account['account_id']}")
+    print(f"     Name: {account['first']} {account['last']}")
+    print(f"     Location: {account['city']}, {account['state']} ({account['lat']:.4f}, {account['long']:.4f})")
+    print(f"     Created: {account['account_creation_date']}")
+    return account
