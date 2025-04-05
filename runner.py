@@ -46,8 +46,43 @@ def run_script(script_path, args=[], script_desc="script"):
         return False
     return True
 
+def parse_arguments():
+    """Parse command line arguments."""
+    parser = argparse.ArgumentParser(
+        description="Credit Card Fraud Detection Workflow",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter
+    )
+    parser.add_argument(
+        "--simulate-only", 
+        action="store_true", 
+        help="Run only the simulation step"
+    )
+    parser.add_argument(
+        "--check-only", 
+        action="store_true", 
+        help="Run only the rule checking step"
+    )
+    parser.add_argument(
+        "--ml-only", 
+        action="store_true", 
+        help="Run only the ML model steps"
+    )
+    parser.add_argument(
+        "--transactions", 
+        type=int, 
+        default=75, 
+        help="Number of transactions to simulate"
+    )
+    return parser.parse_args()
+
 def main():
     """Orchestrates the simulation and checking process."""
+    # Parse arguments
+    args = parse_arguments()
+    
+    # Set environment variable for number of transactions
+    os.environ["NUM_TRANSACTIONS"] = str(args.transactions)
+    
     print("=============================================")
     print("=== Starting Fraud Detection Simulation Workflow ===")
     print("=============================================")
