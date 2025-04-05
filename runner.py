@@ -66,15 +66,13 @@ def main():
 
     # --- Placeholder for Future Steps ---
 
-    # Step 3 (Future): Run ML Model 1 (PCA) Prediction
-    # print("\n--- Step 3 (Future): Running ML Model 1 (PCA) Prediction ---")
-    # if Path("./data/simulation_output/simulated_account_transactions.csv").exists():
-         # You'd need a script that loads the simulated data, preprocesses it like the PCA data,
-         # loads the PCA model, makes predictions, and saves/prints them.
-         # run_script(MODEL_PCA_PREDICT_SCRIPT, ["./data/simulation_output/simulated_account_transactions.csv"])
-    #    print("   (Skipping - Prediction script not implemented yet)")
-    # else:
-    #    print("   (Skipping - Simulated transactions file not found)")
+    # Step 3: Run ML Model 1 (PCA) Prediction
+    print("\n--- Step 3: Running ML Model 1 (PCA) Prediction ---")
+    if Path("./data/simulation_output/simulated_account_transactions.csv").exists():
+        # Run the PCA-based anomaly detection model
+        run_script(MODEL_PCA_PREDICT_SCRIPT, script_desc="PCA-based Fraud Detection")
+    else:
+        print("   (Skipping - Simulated transactions file not found)")
 
 
     # Step 4 (Future): Run ML Model 2 (Simulated Features) Prediction
