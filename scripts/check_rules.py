@@ -78,7 +78,10 @@ def check_transaction_rules(transaction_row, account_details, recent_transaction
         elif pd.isna(amount):
             flags.append("INFO:Missing_Amount_For_Check")
 
-    
+    # --- Velocity Checks ---
+    # Rule 4: High velocity for recently created account
+    if acc_creation_dt and trans_dt:
+        account_age = trans_dt - acc_creation_dt
 
 
 
