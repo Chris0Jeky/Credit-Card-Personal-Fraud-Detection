@@ -4,3 +4,9 @@ from pathlib import Path
 import random
 import json
 from datetime import datetime, timedelta
+
+# --- Configuration ---
+# Path to the dataset we'll sample transaction patterns from
+SOURCE_DATASET_PATH = Path("./Datasets/Credit Card Transactions Fraud Detection Dataset/fraudTrain.csv")
+# Directory to save the simulated data
+OUTPUT_DIR = Path("./data/simulation_output")
