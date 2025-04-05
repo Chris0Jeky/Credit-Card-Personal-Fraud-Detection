@@ -159,3 +159,6 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 /.idea
+Datasets/Credit Card Fraud Detection/creditcard.csv
+Datasets/fraudTest.csv
+Datasets/fraudTrain.csv
