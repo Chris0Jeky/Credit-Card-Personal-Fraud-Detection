@@ -37,4 +37,19 @@ def check_transaction_rules(transaction_row, account_details, recent_transaction
     account_lon = account_details.get('long')
     account_creation_str = account_details.get('account_creation_date')
 
+    # --- Date Checks ---
+    trans_dt = None
+    try:
+        # Handle potential variations in timestamp format if necessary
+        trans_dt = pd.to_datetime(transaction_row['trans_date_trans_time'])
+    except (ValueError, TypeError) as e:
+        flags.append(f"INVALID_TIMESTAMP ({e})")
+
+    acc_creation_dt = None
+    if account_creation_str:
+        try:
+            acc_creation_dt = datetime.fromisoformat(account_creation_str)
+        except (ValueError, TypeError) as e:
+            flags.append(f"INVALID_ACCOUNT_DATE_FORMAT ({e})")
+
 
