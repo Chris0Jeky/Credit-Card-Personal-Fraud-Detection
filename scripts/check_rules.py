@@ -69,7 +69,16 @@ def check_transaction_rules(transaction_row, account_details, recent_transaction
     else:
         flags.append("INFO:Missing_Coordinates_For_Location_Check")
 
+    # --- Amount Checks ---
+    # Rule 3: High transaction amount
+    if 'amt' in transaction_row:
+        amount = pd.to_numeric(transaction_row['amt'], errors='coerce')
+        if pd.notna(amount) and amount > HIGH_AMOUNT_THRESHOLD:
+            flags.append(f"RULE_VIOLATION:HIGH_AMOUNT (${amount:.2f} > ${HIGH_AMOUNT_THRESHOLD})")
+        elif pd.isna(amount):
+            flags.append("INFO:Missing_Amount_For_Check")
 
+    
 
 
 
