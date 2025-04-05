@@ -87,6 +87,9 @@ def check_transaction_rules(transaction_row, account_details, recent_transaction
             one_day_before = trans_dt - timedelta(days=1)
             count_last_24h = sum(
                 1 for ts in recent_transactions if ts >= one_day_before and ts < trans_dt)  # Exclude current trans
-
+            # Add 1 for the current transaction itself when comparing to threshold
+            if (count_last_24h + 1) > RECENT_ACCOUNT_HIGH_VELOCITY_THRESHOLD:
+                flags.append(
+                    f"RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT ({count_last_24h + 1} trans in 24h > {RECENT_ACCOUNT_HIGH_VELOCITY_THRESHOLD})")
 
 
