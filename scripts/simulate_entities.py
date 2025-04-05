@@ -7,9 +7,9 @@ from datetime import datetime, timedelta
 
 # --- Configuration ---
 # Path to the dataset we'll sample transaction patterns from
-SOURCE_DATASET_PATH = Path("../Datasets/Credit Card Transactions Fraud Detection Dataset/fraudTrain.csv")
+SOURCE_DATASET_PATH = Path(__file__).parent.parent / "Datasets" / "Credit Card Transactions Fraud Detection Dataset" / "fraudTrain.csv"
 # Directory to save the simulated data
-OUTPUT_DIR = Path("../data/simulation_output")
+OUTPUT_DIR = Path(__file__).parent.parent / "data" / "simulation_output"
 
 # Files to save
 ACCOUNT_DETAILS_FILE = OUTPUT_DIR / "simulated_account_details.json"
@@ -139,12 +139,12 @@ def simulate_transactions(account_details, source_df, num_transactions):
         return pd.DataFrame(simulated_data, columns=col_order)
 
     def main():
-        """Main simulation logic."""
-        print("--- Starting Entity Simulation ---")
+    """Main simulation logic."""
+    print("--- Starting Entity Simulation ---")
 
-        # 1. Ensure output directory exists
-        OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-        print(f"Output directory: {OUTPUT_DIR.resolve()}")
+    # 1. Ensure output directory exists
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    print(f"Output directory: {OUTPUT_DIR.resolve()}")
 
         # 2. Create simulated account
         print("Creating simulated account...")
@@ -190,4 +190,4 @@ def simulate_transactions(account_details, source_df, num_transactions):
         print("--- Simulation Complete ---")
 
     if __name__ == "__main__":
-        main()
+    main()
