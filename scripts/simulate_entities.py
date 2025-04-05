@@ -3,6 +3,7 @@ from faker import Faker
 from pathlib import Path
 import random
 import json
+import os
 from datetime import datetime, timedelta
 
 # --- Configuration ---
@@ -15,7 +16,8 @@ OUTPUT_DIR = Path(__file__).parent.parent / "data" / "simulation_output"
 ACCOUNT_DETAILS_FILE = OUTPUT_DIR / "simulated_account_details.json"
 TRANSACTIONS_FILE = OUTPUT_DIR / "simulated_account_transactions.csv"
 
-NUM_TRANSACTIONS_TO_SIMULATE = 75 # Generate a decent number of transactions
+# Get number of transactions from environment variable or use default
+NUM_TRANSACTIONS_TO_SIMULATE = int(os.environ.get("NUM_TRANSACTIONS", 75)) # Generate a decent number of transactions
 MIN_ACCOUNT_AGE_DAYS = 60       # Account created between 60 days...
 MAX_ACCOUNT_AGE_DAYS = 365 * 2  # ...and 2 years ago
 MIN_DAYS_BEFORE_FIRST_TRANS = 1 # First transaction happens at least 1 day...
