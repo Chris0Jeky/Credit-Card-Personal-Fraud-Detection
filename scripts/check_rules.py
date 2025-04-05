@@ -159,3 +159,13 @@ def main():
         print(
             f"\n--- Summary: {flagged_count} out of {len(transactions_df)} transactions triggered one or more rules. ---")
 
+    # Optional: Save results with flags added
+    # results_df = pd.DataFrame(results)
+    # results_output_file = SIMULATION_DIR / "simulated_transactions_with_flags.csv"
+    # results_df.to_csv(results_output_file, index=False)
+    # print(f"Results with flags saved to {results_output_file}")
+
+    print("--- Rule Checking Complete ---")
+
+if __name__ == "__main__":
+    main()
