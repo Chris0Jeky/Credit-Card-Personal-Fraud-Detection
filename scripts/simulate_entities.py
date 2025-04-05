@@ -137,3 +137,9 @@ def simulate_transactions(account_details, source_df, num_transactions):
             col_order = list(source_df.columns)  # Try to match source
 
         return pd.DataFrame(simulated_data, columns=col_order)
+
+    def main():
+        """Main simulation logic."""
+        print("--- Starting Entity Simulation ---")
+
+        
