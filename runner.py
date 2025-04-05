@@ -96,4 +96,8 @@ def main():
     run_script(MERCHANT_CHECKER_SCRIPT, ["fraud_Definitely_Fake_LLC"], script_desc="Merchant Checker (Fake)")
     # --- End Placeholder ---
 
-    
+    workflow_end_time = time.time()
+    print("\n=============================================")
+    print(f"=== Workflow Finished in {workflow_end_time - workflow_start_time:.2f} seconds ===")
+    print("=============================================")
+
