@@ -148,13 +148,36 @@ def main():
             print(f"   (Skipping - Simulated transactions file not found at {transactions_file})")
 
 
-    # Step 5 (Optional): Run Merchant Checker on a sample
-    print("\n--- Step 5 (Optional): Running Merchant Checker Example ---")
-    # Example: Check a known legit name and a potentially fake one
-    # Make sure 'Your Bank Inc' is in your data/legit_companies.txt for this to work
-    run_script(MERCHANT_CHECKER_SCRIPT, ["Your Bank Inc"], script_desc="Merchant Checker (Legit)")
-    run_script(MERCHANT_CHECKER_SCRIPT, ["fraud_Definitely_Fake_LLC"], script_desc="Merchant Checker (Fake)")
-    # --- End Placeholder ---
+    # Step 5: Run Merchant Checker
+    # If a specific merchant was provided via command line
+    if args.check_merchant:
+        print(f"\n--- Step 5: Checking Specific Merchant: '{args.check_merchant}' ---")
+        run_script(MERCHANT_CHECKER_SCRIPT, [args.check_merchant], script_desc=f"Merchant Check: {args.check_merchant}")
+    # Otherwise run the standard examples
+    else:
+        print("\n--- Step 5 (Optional): Running Merchant Checker Example ---")
+        # Example: Check a known legit name and a potentially fake one
+        # Make sure 'Your Bank Inc' is in your data/legit_companies.txt for this to work
+        run_script(MERCHANT_CHECKER_SCRIPT, ["Your Bank Inc"], script_desc="Merchant Checker (Legit)")
+        run_script(MERCHANT_CHECKER_SCRIPT, ["fraud_Definitely_Fake_LLC"], script_desc="Merchant Checker (Fake)")
+        
+        # Check merchants from actual transactions if available
+        transactions_file = Path("./data/simulation_output/simulated_account_transactions.csv")
+        if transactions_file.exists() and pd.__version__ != "2.0.0":
+            try:
+                import pandas as pd
+                print("\n--- Checking Random Merchants from Simulated Transactions ---")
+                # Load transactions and sample a few merchants
+                trans_df = pd.read_csv(transactions_file)
+                if 'merchant' in trans_df.columns:
+                    # Get up to 3 random merchants
+                    sample_merchants = trans_df['merchant'].sample(min(3, len(trans_df))).tolist()
+                    for merchant in sample_merchants:
+                        run_script(MERCHANT_CHECKER_SCRIPT, [merchant], 
+                                 script_desc=f"Transaction Merchant: {merchant}")
+            except Exception as e:
+                print(f"Could not analyze transaction merchants: {e}")
+    # --- End Merchant Checking ---
 
     workflow_end_time = time.time()
     print("\n=============================================")
