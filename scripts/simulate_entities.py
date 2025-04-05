@@ -71,3 +71,10 @@ def create_simulated_account():
     print(f"     Location: {account['city']}, {account['state']} ({account['lat']:.4f}, {account['long']:.4f})")
     print(f"     Created: {account['account_creation_date']}")
     return account
+
+def simulate_transactions(account_details, source_df, num_transactions):
+    """Generates transactions for the account by sampling from source_df."""
+    simulated_data = []
+    # Ensure we have enough unique samples if possible, otherwise allow replacement
+    replace_sampling = num_transactions > len(source_df)
+    sampled_transactions = source_df.sample(n=num_transactions, replace=replace_sampling)
