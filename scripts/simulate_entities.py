@@ -118,3 +118,10 @@ def simulate_transactions(account_details, source_df, num_transactions):
             new_trans['trans_date_trans_time'] = current_trans_time.strftime("%Y-%m-%d %H:%M:%S")
             new_trans['unix_time'] = int(current_trans_time.timestamp())
             new_trans['trans_num'] = f"sim_{fake.uuid4()}"  # Mark as simulated
+
+            # NOTE: We are keeping the 'is_fraud' flag from the sampled source transaction.
+            # This means our simulated user might perform 'fraudulent' actions based on the source data's labels.
+
+            simulated_data.append(new_trans)
+
+        
