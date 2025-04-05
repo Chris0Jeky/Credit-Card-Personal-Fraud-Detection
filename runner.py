@@ -63,3 +63,37 @@ def main():
         print("\nWorkflow continued, but errors occurred during rule checking.", file=sys.stderr)
         # Decide whether to stop or continue if rules fail
         # sys.exit(1)
+
+    # --- Placeholder for Future Steps ---
+
+    # Step 3 (Future): Run ML Model 1 (PCA) Prediction
+    # print("\n--- Step 3 (Future): Running ML Model 1 (PCA) Prediction ---")
+    # if Path("./data/simulation_output/simulated_account_transactions.csv").exists():
+         # You'd need a script that loads the simulated data, preprocesses it like the PCA data,
+         # loads the PCA model, makes predictions, and saves/prints them.
+         # run_script(MODEL_PCA_PREDICT_SCRIPT, ["./data/simulation_output/simulated_account_transactions.csv"])
+    #    print("   (Skipping - Prediction script not implemented yet)")
+    # else:
+    #    print("   (Skipping - Simulated transactions file not found)")
+
+
+    # Step 4 (Future): Run ML Model 2 (Simulated Features) Prediction
+    # print("\n--- Step 4 (Future): Running ML Model 2 (Full Features) Prediction ---")
+    # if Path("./data/simulation_output/simulated_account_transactions.csv").exists():
+        # This script would load the simulated data, apply feature engineering matching
+        # how Model 2 was trained, load Model 2, predict, and save/print.
+        # run_script(MODEL_SIMULATED_PREDICT_SCRIPT, ["./data/simulation_output/simulated_account_transactions.csv"])
+    #    print("   (Skipping - Prediction script not implemented yet)")
+    # else:
+    #    print("   (Skipping - Simulated transactions file not found)")
+
+
+    # Step 5 (Optional): Run Merchant Checker on a sample
+    print("\n--- Step 5 (Optional): Running Merchant Checker Example ---")
+    # Example: Check a known legit name and a potentially fake one
+    # Make sure 'Your Bank Inc' is in your data/legit_companies.txt for this to work
+    run_script(MERCHANT_CHECKER_SCRIPT, ["Your Bank Inc"], script_desc="Merchant Checker (Legit)")
+    run_script(MERCHANT_CHECKER_SCRIPT, ["fraud_Definitely_Fake_LLC"], script_desc="Merchant Checker (Fake)")
+    # --- End Placeholder ---
+
+    
