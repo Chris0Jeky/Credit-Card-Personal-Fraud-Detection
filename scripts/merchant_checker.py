@@ -5,7 +5,7 @@ from pathlib import Path
 # Simple fuzzy matching (optional, requires 'pip install thefuzz')
 # from thefuzz import process
 
-LEGIT_COMPANIES_FILE = Path(__file__).parent / "../data/legit_companies.txt"
+LEGIT_COMPANIES_FILE = Path(__file__).parent.parent / "data" / "legit_companies.txt"
 # Adjust path relative to where you place the script if needed
 
 def load_legit_companies(filepath: Path) -> set:
