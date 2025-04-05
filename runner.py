@@ -50,3 +50,9 @@ def main():
     print("=== Starting Fraud Detection Simulation Workflow ===")
     print("=============================================")
     workflow_start_time = time.time()
+
+    # Step 1: Simulate account and transactions
+    print("\n--- Step 1: Generating Simulated Data ---")
+    if not run_script(SIMULATE_SCRIPT, script_desc="Simulation Script"):
+        print("\nWorkflow aborted due to error in simulation.", file=sys.stderr)
+        sys.exit(1)
