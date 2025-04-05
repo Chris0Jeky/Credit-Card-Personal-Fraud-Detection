@@ -22,3 +22,12 @@ MIN_DAYS_BEFORE_FIRST_TRANS = 1 # First transaction happens at least 1 day...
 MAX_DAYS_BEFORE_FIRST_TRANS = 30 # ...and up to 30 days after account creation
 # ---
 
+fake = Faker()
+
+def create_simulated_account():
+    """Generates details for a single simulated account."""
+    profile = fake.profile()
+    # Safer address parsing
+    address_parts = profile.get('address', '').split('\n')
+    street = address_parts[0] if len(address_parts) > 0 else fake.street_address()
+    city_state_zip = address_parts[1] if len(address_parts) > 1 else f"{fake.city()}, {fake.state_abbr()} {fake.zipcode()}"
