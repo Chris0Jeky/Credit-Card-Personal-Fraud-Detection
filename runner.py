@@ -73,6 +73,11 @@ def parse_arguments():
         default=75, 
         help="Number of transactions to simulate"
     )
+    parser.add_argument(
+        "--check-merchant", 
+        type=str,
+        help="Check a specific merchant name against the legitimate list"
+    )
     return parser.parse_args()
 
 def main():
@@ -88,43 +93,59 @@ def main():
     print("=============================================")
     workflow_start_time = time.time()
 
+    # Determine which steps to run
+    run_simulate = not (args.check_only or args.ml_only)
+    run_check = not (args.simulate_only or args.ml_only)
+    run_ml = not (args.simulate_only or args.check_only)
+    
+    # If no specific step is selected, run all steps
+    if not (run_simulate or run_check or run_ml):
+        run_simulate = run_check = run_ml = True
+
     # Step 1: Simulate account and transactions
-    print("\n--- Step 1: Generating Simulated Data ---")
-    if not run_script(SIMULATE_SCRIPT, script_desc="Simulation Script"):
-        print("\nWorkflow aborted due to error in simulation.", file=sys.stderr)
-        sys.exit(1)
-
+    if run_simulate:
+        print("\n--- Step 1: Generating Simulated Data ---")
+        print(f"Simulating {args.transactions} transactions...")
+        if not run_script(SIMULATE_SCRIPT, script_desc="Simulation Script"):
+            print("\nWorkflow aborted due to error in simulation.", file=sys.stderr)
+            sys.exit(1)
+    
     # Step 2: Check rules on simulated data
-    print("\n--- Step 2: Applying Rule-Based Checks ---")
-    if not run_script(CHECK_RULES_SCRIPT, script_desc="Rule Checking Script"):
-        print("\nWorkflow continued, but errors occurred during rule checking.", file=sys.stderr)
-        # Decide whether to stop or continue if rules fail
-        # sys.exit(1)
+    if run_check:
+        print("\n--- Step 2: Applying Rule-Based Checks ---")
+        if not run_script(CHECK_RULES_SCRIPT, script_desc="Rule Checking Script"):
+            print("\nWorkflow continued, but errors occurred during rule checking.", file=sys.stderr)
+            # Decide whether to stop or continue if rules fail
+            # sys.exit(1)
+    
+    # Machine Learning Steps
+    if run_ml:
+        # Step 3: Run ML Model 1 (PCA) Prediction
+        print("\n--- Step 3: Running ML Model 1 (PCA) Prediction ---")
+        transactions_file = Path("./data/simulation_output/simulated_account_transactions.csv")
+        if transactions_file.exists():
+            # Run the PCA-based anomaly detection model
+            try:
+                run_script(MODEL_PCA_PREDICT_SCRIPT, script_desc="PCA-based Fraud Detection")
+            except Exception as e:
+                print(f"  Warning: Could not run PCA model: {e}.")
+                print("  You may need to install scikit-learn with: pip install scikit-learn")
+        else:
+            print(f"   (Skipping - Simulated transactions file not found at {transactions_file})")
+            if args.ml_only:
+                print("   Run the simulation step first or provide transaction data.")
 
-    # --- Placeholder for Future Steps ---
-
-    # Step 3: Run ML Model 1 (PCA) Prediction
-    print("\n--- Step 3: Running ML Model 1 (PCA) Prediction ---")
-    if Path("./data/simulation_output/simulated_account_transactions.csv").exists():
-        # Run the PCA-based anomaly detection model
-        try:
-            run_script(MODEL_PCA_PREDICT_SCRIPT, script_desc="PCA-based Fraud Detection")
-        except Exception as e:
-            print(f"  Warning: Could not run PCA model: {e}. You may need to install scikit-learn.")
-    else:
-        print("   (Skipping - Simulated transactions file not found)")
-
-
-    # Step 4: Run ML Model 2 (Simulated Features) Prediction
-    print("\n--- Step 4: Running ML Model 2 (Full Features) Prediction ---")
-    if Path("./data/simulation_output/simulated_account_transactions.csv").exists():
-        # Run the simulated features-based prediction model
-        try:
-            run_script(MODEL_SIMULATED_PREDICT_SCRIPT, script_desc="Simulated Features Fraud Detection")
-        except Exception as e:
-            print(f"  Warning: Could not run Simulated Features model: {e}. You may need to install scikit-learn.")
-    else:
-        print("   (Skipping - Simulated transactions file not found)")
+        # Step 4: Run ML Model 2 (Simulated Features) Prediction
+        print("\n--- Step 4: Running ML Model 2 (Full Features) Prediction ---")
+        if transactions_file.exists():
+            # Run the simulated features-based prediction model
+            try:
+                run_script(MODEL_SIMULATED_PREDICT_SCRIPT, script_desc="Simulated Features Fraud Detection")
+            except Exception as e:
+                print(f"  Warning: Could not run Simulated Features model: {e}.")
+                print("  You may need to install scikit-learn with: pip install scikit-learn")
+        else:
+            print(f"   (Skipping - Simulated transactions file not found at {transactions_file})")
 
 
     # Step 5 (Optional): Run Merchant Checker on a sample
