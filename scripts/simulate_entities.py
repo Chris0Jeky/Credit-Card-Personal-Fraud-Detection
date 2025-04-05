@@ -45,3 +45,23 @@ def create_simulated_account():
 
     creation_delta_days = random.randint(MIN_ACCOUNT_AGE_DAYS, MAX_ACCOUNT_AGE_DAYS)
     account_creation_date = datetime.now() - timedelta(days=creation_delta_days)
+
+    account = {
+        "account_id": fake.uuid4(),  # Unique ID for this simulated account
+        "cc_num": fake.credit_card_number(card_type='visa'),  # Generate a plausible CC number
+        "first": profile.get('name', 'Unknown Unknown').split(' ')[0],
+        "last": profile.get('name', 'Unknown Unknown').split(' ')[-1],
+        "gender": "M" if profile.get('sex') == 'M' else "F",
+        "street": street,
+        "city": city,
+        "state": state,
+        "zip": zip_code,
+        "lat": float(profile.get('current_location', (fake.latitude(), 0))[0]),  # Get lat/lon
+        "long": float(profile.get('current_location', (0, fake.longitude()))[1]),
+        "city_pop": random.randint(5000, 2000000),  # Add city_pop if needed by dataset columns
+        "job": profile.get('job', fake.job()),
+        "dob": profile.get('birthdate', fake.date_of_birth(minimum_age=18, maximum_age=90)).strftime("%Y-%m-%d"),
+        "account_creation_date": account_creation_date.isoformat(),  # Store as ISO string
+        "email": profile.get('mail', fake.email()),
+        # Add any other fields you might want to simulate
+    }
