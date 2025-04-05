@@ -158,3 +158,20 @@ def simulate_transactions(account_details, source_df, num_transactions):
         except Exception as e:
             print(f"Error saving account details: {e}")
             return  # Stop if we can't save account
+
+        # 3. Load source transaction data
+        print(f"Loading source transaction data from {SOURCE_DATASET_PATH}...")
+        try:
+            # Try to infer index column if it exists and is unnamed
+            temp_df = pd.read_csv(SOURCE_DATASET_PATH, nrows=1)
+            if temp_df.columns[0].startswith('Unnamed:'):
+                source_df = pd.read_csv(SOURCE_DATASET_PATH, index_col=0)
+            else:
+                source_df = pd.read_csv(SOURCE_DATASET_PATH)
+            print(f"   Loaded {len(source_df)} source transactions.")
+        except FileNotFoundError:
+            print(f"Error: Source dataset not found at {SOURCE_DATASET_PATH}")
+            return
+        except Exception as e:
+            print(f"Error loading source dataset: {e}")
+            return
