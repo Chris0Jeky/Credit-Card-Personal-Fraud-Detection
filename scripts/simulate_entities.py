@@ -186,3 +186,8 @@ def simulate_transactions(account_details, source_df, num_transactions):
             print(f"   Simulated transactions saved to {TRANSACTIONS_FILE.name} ({len(simulated_df)} rows)")
         except Exception as e:
             print(f"Error saving simulated transactions: {e}")
+
+        print("--- Simulation Complete ---")
+
+    if __name__ == "__main__":
+        main()
