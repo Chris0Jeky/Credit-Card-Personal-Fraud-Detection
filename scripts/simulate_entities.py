@@ -31,3 +31,16 @@ def create_simulated_account():
     address_parts = profile.get('address', '').split('\n')
     street = address_parts[0] if len(address_parts) > 0 else fake.street_address()
     city_state_zip = address_parts[1] if len(address_parts) > 1 else f"{fake.city()}, {fake.state_abbr()} {fake.zipcode()}"
+
+    city, state, zip_code = fake.city(), fake.state_abbr(), fake.zipcode()  # Defaults
+    try:
+        parts = city_state_zip.split(',')
+        city = parts[0].strip()
+        state_zip = parts[1].strip().split(' ')
+        if len(state_zip) >= 2:
+            state = state_zip[0]
+            zip_code = state_zip[1]
+    except Exception:
+        pass  # Keep defaults if parsing fails
+
+    
