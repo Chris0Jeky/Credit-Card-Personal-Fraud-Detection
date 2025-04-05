@@ -180,4 +180,9 @@ def simulate_transactions(account_details, source_df, num_transactions):
         print(f"Simulating {NUM_TRANSACTIONS_TO_SIMULATE} transactions...")
         simulated_df = simulate_transactions(account, source_df, NUM_TRANSACTIONS_TO_SIMULATE)
 
-        
+        # 5. Save simulated transactions
+        try:
+            simulated_df.to_csv(TRANSACTIONS_FILE, index=False)
+            print(f"   Simulated transactions saved to {TRANSACTIONS_FILE.name} ({len(simulated_df)} rows)")
+        except Exception as e:
+            print(f"Error saving simulated transactions: {e}")
