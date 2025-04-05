@@ -124,4 +124,14 @@ def simulate_transactions(account_details, source_df, num_transactions):
 
             simulated_data.append(new_trans)
 
-        
+        # Create DataFrame with columns in a sensible order (match original if possible)
+        # Get column order from original dataset if available
+        if 'account_id' not in source_df.columns:
+            # Define a sensible default order if source_df doesn't match perfectly
+            col_order = ['account_id', 'trans_date_trans_time', 'cc_num', 'merchant', 'category', 'amt', 'first',
+                         'last', 'gender', 'street', 'city', 'state', 'zip', 'lat', 'long', 'city_pop', 'job',
+                         'dob', 'trans_num', 'unix_time', 'merch_lat', 'merch_long', 'is_fraud']
+            # Filter order to only include columns actually generated
+            col_order = [col for col in col_order if col in simulated_data[0]]
+        else:
+            col_order = list(source_df.columns)  # Try to match source
