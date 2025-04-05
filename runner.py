@@ -90,6 +90,18 @@ def parse_arguments():
         action="store_true",
         help="Include detailed statistics in flag analysis"
     )
+    parser.add_argument(
+        "--visualize", 
+        action="store_true",
+        help="Generate visualizations from the data"
+    )
+    parser.add_argument(
+        "--viz-format", 
+        type=str,
+        default="png",
+        choices=["png", "svg", "pdf", "jpg"],
+        help="Format for visualization files"
+    )
     return parser.parse_args()
 
 def main():
