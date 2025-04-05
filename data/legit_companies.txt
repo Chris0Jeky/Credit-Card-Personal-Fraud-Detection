@@ -1,1 +1,38 @@
-fukky
+Your Bank Inc
+Amazon
+Walmart
+Target
+Best Buy
+Costco
+Home Depot
+Lowe's
+Starbucks
+McDonald's
+Apple
+Microsoft
+Google
+Facebook
+Netflix
+Uber
+Lyft
+DoorDash
+Grubhub
+CVS
+Walgreens
+Shell
+ExxonMobil
+Chevron
+BP
+Visa
+Mastercard
+American Express
+Discover
+Chase
+Bank of America
+Wells Fargo
+Citibank
+Capital One
+PayPal
+Venmo
+Square
+Stripe
