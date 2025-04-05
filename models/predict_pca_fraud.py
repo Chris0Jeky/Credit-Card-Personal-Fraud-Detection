@@ -67,14 +67,14 @@ def preprocess_data(df):
     for col in X.columns:
         # Calculate column median, ignoring NaN values
         col_median = X[col].median()
-        # Fill NaN values with median
-        X[col].fillna(col_median, inplace=True)
+        # Fill NaN values with median (avoiding inplace=True)
+        X[col] = X[col].fillna(col_median)
     
     # Some columns might be object types with numeric values, convert to float
     for col in X.columns:
         try:
             X[col] = pd.to_numeric(X[col], errors='coerce')
-            X[col].fillna(X[col].median(), inplace=True)
+            X[col] = X[col].fillna(X[col].median())
         except Exception as e:
             print(f"Warning: Couldn't convert column {col} to numeric: {e}")
     
