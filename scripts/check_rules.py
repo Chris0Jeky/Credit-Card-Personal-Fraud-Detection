@@ -82,6 +82,11 @@ def check_transaction_rules(transaction_row, account_details, recent_transaction
     # Rule 4: High velocity for recently created account
     if acc_creation_dt and trans_dt:
         account_age = trans_dt - acc_creation_dt
+        if account_age.days <= RECENT_ACCOUNT_DAYS:
+            # Count transactions within the last 24 hours of the current transaction
+            one_day_before = trans_dt - timedelta(days=1)
+            count_last_24h = sum(
+                1 for ts in recent_transactions if ts >= one_day_before and ts < trans_dt)  # Exclude current trans
 
 
 
