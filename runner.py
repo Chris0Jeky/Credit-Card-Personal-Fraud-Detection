@@ -43,3 +43,10 @@ def run_script(script_path, args=[], script_desc="script"):
         #     print("--- End Error Output ---", file=sys.stderr)
         return False
     return True
+
+def main():
+    """Orchestrates the simulation and checking process."""
+    print("=============================================")
+    print("=== Starting Fraud Detection Simulation Workflow ===")
+    print("=============================================")
+    workflow_start_time = time.time()
