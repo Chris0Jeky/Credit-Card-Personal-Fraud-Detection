@@ -17,3 +17,13 @@ RECENT_ACCOUNT_DAYS = 30     # Definition of a 'recent' account for velocity che
 RECENT_ACCOUNT_HIGH_VELOCITY_THRESHOLD = 5 # Max transactions in 24h for recent account
 # ---
 
+def calculate_distance(lat1, lon1, lat2, lon2):
+    """Calculate distance in kilometers between two lat/lon points."""
+    if pd.isna(lat1) or pd.isna(lon1) or pd.isna(lat2) or pd.isna(lon2):
+        return float('inf') # Indicate missing data
+    try:
+        return geodesic((lat1, lon1), (lat2, lon2)).km
+    except ValueError:
+        print(f"Warning: Invalid coordinates for distance calculation ({lat1},{lon1}) to ({lat2},{lon2})")
+        return float('inf') # Indicate calculation error
+
