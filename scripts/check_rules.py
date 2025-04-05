@@ -153,3 +153,9 @@ def main():
             print(f"  Amount: {transaction['amt']:.2f}, Merchant: {transaction['merchant']}")
             print(f"  !! Flags Triggered: {'; '.join(flags)}")
 
+    if flagged_count == 0:
+        print("\nNo transactions flagged by the defined rules.")
+    else:
+        print(
+            f"\n--- Summary: {flagged_count} out of {len(transactions_df)} transactions triggered one or more rules. ---")
+
