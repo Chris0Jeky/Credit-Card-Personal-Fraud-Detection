@@ -70,7 +70,10 @@ def main():
     print("\n--- Step 3: Running ML Model 1 (PCA) Prediction ---")
     if Path("./data/simulation_output/simulated_account_transactions.csv").exists():
         # Run the PCA-based anomaly detection model
-        run_script(MODEL_PCA_PREDICT_SCRIPT, script_desc="PCA-based Fraud Detection")
+        try:
+            run_script(MODEL_PCA_PREDICT_SCRIPT, script_desc="PCA-based Fraud Detection")
+        except Exception as e:
+            print(f"  Warning: Could not run PCA model: {e}. You may need to install scikit-learn.")
     else:
         print("   (Skipping - Simulated transactions file not found)")
 
@@ -79,7 +82,10 @@ def main():
     print("\n--- Step 4: Running ML Model 2 (Full Features) Prediction ---")
     if Path("./data/simulation_output/simulated_account_transactions.csv").exists():
         # Run the simulated features-based prediction model
-        run_script(MODEL_SIMULATED_PREDICT_SCRIPT, script_desc="Simulated Features Fraud Detection")
+        try:
+            run_script(MODEL_SIMULATED_PREDICT_SCRIPT, script_desc="Simulated Features Fraud Detection")
+        except Exception as e:
+            print(f"  Warning: Could not run Simulated Features model: {e}. You may need to install scikit-learn.")
     else:
         print("   (Skipping - Simulated transactions file not found)")
 
