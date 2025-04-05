@@ -83,3 +83,9 @@ def simulate_transactions(account_details, source_df, num_transactions):
     account_creation_dt = datetime.fromisoformat(account_details['account_creation_date'])
     first_trans_delta = timedelta(days=random.randint(MIN_DAYS_BEFORE_FIRST_TRANS, MAX_DAYS_BEFORE_FIRST_TRANS))
     current_trans_time = account_creation_dt + first_trans_delta
+
+    # Select columns from the source_df that we want to keep directly
+    # Keep merchant details, amount, category, and potentially the original fraud flag
+    cols_to_keep = ['merchant', 'category', 'amt', 'merch_lat', 'merch_long', 'is_fraud']
+    # Ensure all expected columns exist in source_df
+    cols_to_keep = [col for col in cols_to_keep if col in source_df.columns]
