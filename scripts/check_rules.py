@@ -99,4 +99,16 @@ def main():
     """Main rule checking logic."""
     print("--- Starting Rule-Based Checks ---")
 
+    # 1. Load simulated account details
+    print(f"Loading account details from {ACCOUNT_DETAILS_FILE}...")
+    try:
+        with open(ACCOUNT_DETAILS_FILE, 'r') as f:
+            account_details = json.load(f)
+        print(f"   Loaded details for account {account_details.get('account_id', 'N/A')}")
+    except FileNotFoundError:
+        print(f"Error: Account details file not found at {ACCOUNT_DETAILS_FILE}")
+        return
+    except Exception as e:
+        print(f"Error loading account details: {e}")
+        return
 
