@@ -112,3 +112,19 @@ def main():
         print(f"Error loading account details: {e}")
         return
 
+    # 2. Load simulated transactions
+    print(f"Loading transactions from {TRANSACTIONS_FILE}...")
+    try:
+        transactions_df = pd.read_csv(TRANSACTIONS_FILE)
+        # Convert timestamp column for easier handling
+        transactions_df['trans_ts'] = pd.to_datetime(transactions_df['trans_date_trans_time'], errors='coerce')
+        # Sort by time for velocity checks
+        transactions_df = transactions_df.sort_values(by='trans_ts').reset_index(drop=True)
+        print(f"   Loaded {len(transactions_df)} transactions.")
+    except FileNotFoundError:
+        print(f"Error: Transactions file not found at {TRANSACTIONS_FILE}")
+        return
+    except Exception as e:
+        print(f"Error loading or processing transactions: {e}")
+        return
+
