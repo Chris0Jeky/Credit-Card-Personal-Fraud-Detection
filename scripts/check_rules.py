@@ -95,3 +95,8 @@ def check_transaction_rules(transaction_row, account_details, recent_transaction
     # Add more rules here: time of day, specific merchant/category flags, etc.
     return flags
 
+def main():
+    """Main rule checking logic."""
+    print("--- Starting Rule-Based Checks ---")
+
+
