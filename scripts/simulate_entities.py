@@ -89,3 +89,10 @@ def simulate_transactions(account_details, source_df, num_transactions):
     cols_to_keep = ['merchant', 'category', 'amt', 'merch_lat', 'merch_long', 'is_fraud']
     # Ensure all expected columns exist in source_df
     cols_to_keep = [col for col in cols_to_keep if col in source_df.columns]
+
+    for _, source_row in sampled_transactions.iterrows():
+        new_trans = {}
+
+        # Copy relevant fields from the source transaction
+        for col in cols_to_keep:
+            new_trans[col] = source_row[col]
