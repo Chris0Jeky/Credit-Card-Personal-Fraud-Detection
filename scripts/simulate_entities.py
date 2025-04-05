@@ -135,3 +135,5 @@ def simulate_transactions(account_details, source_df, num_transactions):
             col_order = [col for col in col_order if col in simulated_data[0]]
         else:
             col_order = list(source_df.columns)  # Try to match source
+
+        return pd.DataFrame(simulated_data, columns=col_order)
