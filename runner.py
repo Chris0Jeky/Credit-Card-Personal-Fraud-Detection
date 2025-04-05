@@ -24,4 +24,12 @@ def run_script(script_path, args=[], script_desc="script"):
         print(f"Error: {script_desc} not found at {script_path}", file=sys.stderr)
         return False
 
-    
+    command = [sys.executable, str(script_path)] + args
+    print(f"\n>>> Running {script_desc}: {' '.join(command)}")
+    start_time = time.time()
+    # Use text=True for automatic encoding/decoding
+    # Use capture_output=False to see the script's output in real-time
+    result = subprocess.run(command, text=True, capture_output=False,
+                            check=False)  # check=False allows us to handle errors manually
+    end_time = time.time()
+    print(f"<<< Finished {script_desc} in {end_time - start_time:.2f} seconds. Exit code: {result.returncode}")
