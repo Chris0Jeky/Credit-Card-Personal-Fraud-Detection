@@ -56,3 +56,10 @@ def main():
     if not run_script(SIMULATE_SCRIPT, script_desc="Simulation Script"):
         print("\nWorkflow aborted due to error in simulation.", file=sys.stderr)
         sys.exit(1)
+
+    # Step 2: Check rules on simulated data
+    print("\n--- Step 2: Applying Rule-Based Checks ---")
+    if not run_script(CHECK_RULES_SCRIPT, script_desc="Rule Checking Script"):
+        print("\nWorkflow continued, but errors occurred during rule checking.", file=sys.stderr)
+        # Decide whether to stop or continue if rules fail
+        # sys.exit(1)
