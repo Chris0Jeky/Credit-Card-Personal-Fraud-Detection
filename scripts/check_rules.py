@@ -52,4 +52,19 @@ def check_transaction_rules(transaction_row, account_details, recent_transaction
         except (ValueError, TypeError) as e:
             flags.append(f"INVALID_ACCOUNT_DATE_FORMAT ({e})")
 
+    # Rule 1: Transaction before account creation
+    if trans_dt and acc_creation_dt and trans_dt < acc_creation_dt:
+        flags.append(
+            f"RULE_VIOLATION:TRANSACTION_BEFORE_ACCOUNT_CREATION ({trans_dt.date()} vs {acc_creation_dt.date()})")
+
+    # --- Location Checks ---
+    # Rule 2: Transaction far from account home location
+    if 'merch_lat' in transaction_row and 'merch_long' in transaction_row and account_lat is not None and account_lon is not None:
+        distance = calculate_distance(
+            transaction_row['merch_lat'], transaction_row['merch_long'],
+            account_lat, account_lon
+        )
+        
+
+
 
