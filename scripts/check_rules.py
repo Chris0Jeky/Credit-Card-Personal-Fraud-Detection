@@ -133,5 +133,7 @@ def main():
     flagged_count = 0
     all_timestamps = transactions_df['trans_ts'].dropna().tolist()  # List of all valid timestamps
 
+    results = []  # Store results for potential later use
+
     
 
