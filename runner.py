@@ -15,6 +15,7 @@ SIMULATE_SCRIPT = SCRIPTS_DIR / "simulate_entities.py"
 CHECK_RULES_SCRIPT = SCRIPTS_DIR / "check_rules.py"
 MERCHANT_CHECKER_SCRIPT = SCRIPTS_DIR / "merchant_checker.py"
 ANALYZE_FLAGS_SCRIPT = SCRIPTS_DIR / "analyze_flags.py"
+VISUALIZE_SCRIPT = SCRIPTS_DIR / "visualize_fraud.py"
 
 # Add paths to future model prediction scripts here
 MODEL_PCA_PREDICT_SCRIPT = ROOT_DIR / "models" / "predict_pca_fraud.py"
