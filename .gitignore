@@ -160,5 +160,5 @@ cython_debug/
 #.idea/
 /.idea
 Datasets/Credit Card Fraud Detection/creditcard.csv
-Datasets/fraudTest.csv
-Datasets/fraudTrain.csv
+Datasets/Credit Card Transactions Fraud Detection Dataset/fraudTest.csv
+Datasets/Credit Card Transactions Fraud Detection Dataset/fraudTrain.csv
