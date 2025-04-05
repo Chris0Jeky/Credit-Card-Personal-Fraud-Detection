@@ -2,8 +2,13 @@ import argparse
 import sys
 from pathlib import Path
 
-# Simple fuzzy matching (optional, requires 'pip install thefuzz')
-# from thefuzz import process
+# Simple fuzzy matching 
+try:
+    from thefuzz import process
+    FUZZY_MATCHING_AVAILABLE = True
+except ImportError:
+    print("Note: thefuzz library not available. Install with 'pip install thefuzz' for fuzzy matching.")
+    FUZZY_MATCHING_AVAILABLE = False
 
 LEGIT_COMPANIES_FILE = Path(__file__).parent.parent / "data" / "legit_companies.txt"
 # Adjust path relative to where you place the script if needed
@@ -23,21 +28,31 @@ def load_legit_companies(filepath: Path) -> set:
         print(f"Error loading file {filepath}: {e}", file=sys.stderr)
         return set()
 
-def check_merchant(merchant_name: str, legit_companies: set) -> bool:
+def check_merchant(merchant_name: str, legit_companies: set) -> tuple:
     """
     Checks if the merchant name is in the set of legitimate companies.
-    Starts with a simple exact match.
+    Returns a tuple of (is_legit, match_details).
     """
+    merchant_name = merchant_name.strip()
+    
     # Basic check: Exact match (case-insensitive)
-    return merchant_name.strip().lower() in {c.lower() for c in legit_companies}
+    if merchant_name.lower() in {c.lower() for c in legit_companies}:
+        return True, f"Exact match found for '{merchant_name}'"
 
-    # --- Optional: Fuzzy Matching Example ---
-    # if not legit_companies:
-    #     return False # Or handle error appropriately
-    # # Find the best match above a certain threshold (e.g., 85)
-    # best_match = process.extractOne(merchant_name, legit_companies, score_cutoff=85)
-    # return best_match is not None
-    # --- End Optional ---
+    # Check for fraud prefix in merchant name
+    if merchant_name.lower().startswith('fraud_'):
+        return False, f"Suspicious prefix 'fraud_' found in merchant name"
+    
+    # Fuzzy matching if available
+    if FUZZY_MATCHING_AVAILABLE and legit_companies:
+        # Find the best match above a certain threshold (e.g., 85)
+        threshold = 85  # Minimum similarity score (0-100)
+        best_match = process.extractOne(merchant_name, legit_companies, score_cutoff=threshold)
+        
+        if best_match:
+            return True, f"Fuzzy match found: '{best_match[0]}' with {best_match[1]}% similarity"
+            
+    return False, "No match found in legitimate companies list"
 
 
 def main():
