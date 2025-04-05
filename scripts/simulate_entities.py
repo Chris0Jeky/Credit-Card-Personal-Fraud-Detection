@@ -78,3 +78,8 @@ def simulate_transactions(account_details, source_df, num_transactions):
     # Ensure we have enough unique samples if possible, otherwise allow replacement
     replace_sampling = num_transactions > len(source_df)
     sampled_transactions = source_df.sample(n=num_transactions, replace=replace_sampling)
+
+    # Start transactions sometime after account creation
+    account_creation_dt = datetime.fromisoformat(account_details['account_creation_date'])
+    first_trans_delta = timedelta(days=random.randint(MIN_DAYS_BEFORE_FIRST_TRANS, MAX_DAYS_BEFORE_FIRST_TRANS))
+    current_trans_time = account_creation_dt + first_trans_delta
