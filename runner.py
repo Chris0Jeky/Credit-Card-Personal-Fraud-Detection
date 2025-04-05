@@ -101,3 +101,5 @@ def main():
     print(f"=== Workflow Finished in {workflow_end_time - workflow_start_time:.2f} seconds ===")
     print("=============================================")
 
+if __name__ == "__main__":
+    main()
