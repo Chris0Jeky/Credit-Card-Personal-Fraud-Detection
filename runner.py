@@ -216,6 +216,36 @@ def main():
 
     # --- End of Flag Analysis
 
+    # --- Add Visualizations if requested
+    if args.visualize:
+        print("\n--- Generating Data Visualizations ---")
+        transactions_file = Path("./data/simulation_output/simulated_account_transactions.csv")
+        flagged_file = Path("./data/simulation_output/simulated_transactions_with_flags.csv")
+        pca_file = Path("./data/simulation_output/pca_fraud_predictions.csv")
+        simulated_file = Path("./data/simulation_output/simulated_fraud_predictions.csv")
+        
+        # Check if at least one data file exists
+        if transactions_file.exists() or flagged_file.exists() or pca_file.exists() or simulated_file.exists():
+            viz_args = ["--format", args.viz_format]
+            
+            # Add paths to existing files
+            if transactions_file.exists():
+                viz_args.extend(["--transactions", str(transactions_file)])
+            if flagged_file.exists():
+                viz_args.extend(["--flagged", str(flagged_file)])
+            if pca_file.exists():
+                viz_args.extend(["--pca", str(pca_file)])
+            if simulated_file.exists():
+                viz_args.extend(["--simulated", str(simulated_file)])
+            
+            run_script(VISUALIZE_SCRIPT, viz_args, script_desc="Data Visualization")
+            print("\nVisualization report created in data/simulation_output/visualizations/")
+        else:
+            print("\nCannot generate visualizations: No data files found.")
+            print("Please run simulation and analysis steps first.")
+
+    # --- End of Visualizations
+
     workflow_end_time = time.time()
     print("\n=============================================")
     print(f"=== Workflow Finished in {workflow_end_time - workflow_start_time:.2f} seconds ===")
