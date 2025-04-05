@@ -75,15 +75,13 @@ def main():
         print("   (Skipping - Simulated transactions file not found)")
 
 
-    # Step 4 (Future): Run ML Model 2 (Simulated Features) Prediction
-    # print("\n--- Step 4 (Future): Running ML Model 2 (Full Features) Prediction ---")
-    # if Path("./data/simulation_output/simulated_account_transactions.csv").exists():
-        # This script would load the simulated data, apply feature engineering matching
-        # how Model 2 was trained, load Model 2, predict, and save/print.
-        # run_script(MODEL_SIMULATED_PREDICT_SCRIPT, ["./data/simulation_output/simulated_account_transactions.csv"])
-    #    print("   (Skipping - Prediction script not implemented yet)")
-    # else:
-    #    print("   (Skipping - Simulated transactions file not found)")
+    # Step 4: Run ML Model 2 (Simulated Features) Prediction
+    print("\n--- Step 4: Running ML Model 2 (Full Features) Prediction ---")
+    if Path("./data/simulation_output/simulated_account_transactions.csv").exists():
+        # Run the simulated features-based prediction model
+        run_script(MODEL_SIMULATED_PREDICT_SCRIPT, script_desc="Simulated Features Fraud Detection")
+    else:
+        print("   (Skipping - Simulated transactions file not found)")
 
 
     # Step 5 (Optional): Run Merchant Checker on a sample
