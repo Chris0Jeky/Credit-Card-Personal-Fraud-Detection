@@ -97,48 +97,48 @@ def simulate_transactions(account_details, source_df, num_transactions):
         for col in cols_to_keep:
             new_trans[col] = source_row[col]
 
-            # Overwrite/Add customer and transaction-specific details
-            new_trans['account_id'] = account_details['account_id']  # Link to account
-            new_trans['cc_num'] = account_details['cc_num']
-            new_trans['first'] = account_details['first']  # Add customer name for context if needed
-            new_trans['last'] = account_details['last']
-            # Add customer location at time of transaction (same as home for simplicity now)
-            new_trans['lat'] = account_details['lat']
-            new_trans['long'] = account_details['long']
+        # Overwrite/Add customer and transaction-specific details
+        new_trans['account_id'] = account_details['account_id']  # Link to account
+        new_trans['cc_num'] = account_details['cc_num']
+        new_trans['first'] = account_details['first']  # Add customer name for context if needed
+        new_trans['last'] = account_details['last']
+        # Add customer location at time of transaction (same as home for simplicity now)
+        new_trans['lat'] = account_details['lat']
+        new_trans['long'] = account_details['long']
 
-            # Add other account fields if they exist as columns in the original dataset schema
-            for key in ['gender', 'city', 'state', 'zip', 'job', 'dob', 'city_pop']:
-                if key in source_df.columns:  # Only add if it's an expected column
-                    new_trans[key] = account_details[key]
+        # Add other account fields if they exist as columns in the original dataset schema
+        for key in ['gender', 'city', 'state', 'zip', 'job', 'dob', 'city_pop']:
+            if key in source_df.columns:  # Only add if it's an expected column
+                new_trans[key] = account_details[key]
 
-            # Generate new transaction time & ID
-            # Add variable time delta: seconds to hours
-            time_delta_seconds = random.randint(30, 6 * 60 * 60)  # 30 seconds to 6 hours
-            current_trans_time += timedelta(seconds=time_delta_seconds)
-            new_trans['trans_date_trans_time'] = current_trans_time.strftime("%Y-%m-%d %H:%M:%S")
-            new_trans['unix_time'] = int(current_trans_time.timestamp())
-            new_trans['trans_num'] = f"sim_{fake.uuid4()}"  # Mark as simulated
+        # Generate new transaction time & ID
+        # Add variable time delta: seconds to hours
+        time_delta_seconds = random.randint(30, 6 * 60 * 60)  # 30 seconds to 6 hours
+        current_trans_time += timedelta(seconds=time_delta_seconds)
+        new_trans['trans_date_trans_time'] = current_trans_time.strftime("%Y-%m-%d %H:%M:%S")
+        new_trans['unix_time'] = int(current_trans_time.timestamp())
+        new_trans['trans_num'] = f"sim_{fake.uuid4()}"  # Mark as simulated
 
-            # NOTE: We are keeping the 'is_fraud' flag from the sampled source transaction.
-            # This means our simulated user might perform 'fraudulent' actions based on the source data's labels.
+        # NOTE: We are keeping the 'is_fraud' flag from the sampled source transaction.
+        # This means our simulated user might perform 'fraudulent' actions based on the source data's labels.
 
-            simulated_data.append(new_trans)
+        simulated_data.append(new_trans)
 
-        # Create DataFrame with columns in a sensible order (match original if possible)
-        # Get column order from original dataset if available
-        if 'account_id' not in source_df.columns:
-            # Define a sensible default order if source_df doesn't match perfectly
-            col_order = ['account_id', 'trans_date_trans_time', 'cc_num', 'merchant', 'category', 'amt', 'first',
-                         'last', 'gender', 'street', 'city', 'state', 'zip', 'lat', 'long', 'city_pop', 'job',
-                         'dob', 'trans_num', 'unix_time', 'merch_lat', 'merch_long', 'is_fraud']
-            # Filter order to only include columns actually generated
-            col_order = [col for col in col_order if col in simulated_data[0]]
-        else:
-            col_order = list(source_df.columns)  # Try to match source
+    # Create DataFrame with columns in a sensible order (match original if possible)
+    # Get column order from original dataset if available
+    if 'account_id' not in source_df.columns:
+        # Define a sensible default order if source_df doesn't match perfectly
+        col_order = ['account_id', 'trans_date_trans_time', 'cc_num', 'merchant', 'category', 'amt', 'first',
+                     'last', 'gender', 'street', 'city', 'state', 'zip', 'lat', 'long', 'city_pop', 'job',
+                     'dob', 'trans_num', 'unix_time', 'merch_lat', 'merch_long', 'is_fraud']
+        # Filter order to only include columns actually generated
+        col_order = [col for col in col_order if col in simulated_data[0]]
+    else:
+        col_order = list(source_df.columns)  # Try to match source
 
-        return pd.DataFrame(simulated_data, columns=col_order)
+    return pd.DataFrame(simulated_data, columns=col_order)
 
-    def main():
+def main():
     """Main simulation logic."""
     print("--- Starting Entity Simulation ---")
 
@@ -146,48 +146,48 @@ def simulate_transactions(account_details, source_df, num_transactions):
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     print(f"Output directory: {OUTPUT_DIR.resolve()}")
 
-        # 2. Create simulated account
-        print("Creating simulated account...")
-        account = create_simulated_account()
+    # 2. Create simulated account
+    print("Creating simulated account...")
+    account = create_simulated_account()
 
-        # Save account details
-        try:
-            with open(ACCOUNT_DETAILS_FILE, 'w') as f:
-                json.dump(account, f, indent=4)
-            print(f"   Account details saved to {ACCOUNT_DETAILS_FILE.name}")
-        except Exception as e:
-            print(f"Error saving account details: {e}")
-            return  # Stop if we can't save account
+    # Save account details
+    try:
+        with open(ACCOUNT_DETAILS_FILE, 'w') as f:
+            json.dump(account, f, indent=4)
+        print(f"   Account details saved to {ACCOUNT_DETAILS_FILE.name}")
+    except Exception as e:
+        print(f"Error saving account details: {e}")
+        return  # Stop if we can't save account
 
-        # 3. Load source transaction data
-        print(f"Loading source transaction data from {SOURCE_DATASET_PATH}...")
-        try:
-            # Try to infer index column if it exists and is unnamed
-            temp_df = pd.read_csv(SOURCE_DATASET_PATH, nrows=1)
-            if temp_df.columns[0].startswith('Unnamed:'):
-                source_df = pd.read_csv(SOURCE_DATASET_PATH, index_col=0)
-            else:
-                source_df = pd.read_csv(SOURCE_DATASET_PATH)
-            print(f"   Loaded {len(source_df)} source transactions.")
-        except FileNotFoundError:
-            print(f"Error: Source dataset not found at {SOURCE_DATASET_PATH}")
-            return
-        except Exception as e:
-            print(f"Error loading source dataset: {e}")
-            return
+    # 3. Load source transaction data
+    print(f"Loading source transaction data from {SOURCE_DATASET_PATH}...")
+    try:
+        # Try to infer index column if it exists and is unnamed
+        temp_df = pd.read_csv(SOURCE_DATASET_PATH, nrows=1)
+        if temp_df.columns[0].startswith('Unnamed:'):
+            source_df = pd.read_csv(SOURCE_DATASET_PATH, index_col=0)
+        else:
+            source_df = pd.read_csv(SOURCE_DATASET_PATH)
+        print(f"   Loaded {len(source_df)} source transactions.")
+    except FileNotFoundError:
+        print(f"Error: Source dataset not found at {SOURCE_DATASET_PATH}")
+        return
+    except Exception as e:
+        print(f"Error loading source dataset: {e}")
+        return
 
-        # 4. Simulate transactions
-        print(f"Simulating {NUM_TRANSACTIONS_TO_SIMULATE} transactions...")
-        simulated_df = simulate_transactions(account, source_df, NUM_TRANSACTIONS_TO_SIMULATE)
+    # 4. Simulate transactions
+    print(f"Simulating {NUM_TRANSACTIONS_TO_SIMULATE} transactions...")
+    simulated_df = simulate_transactions(account, source_df, NUM_TRANSACTIONS_TO_SIMULATE)
 
-        # 5. Save simulated transactions
-        try:
-            simulated_df.to_csv(TRANSACTIONS_FILE, index=False)
-            print(f"   Simulated transactions saved to {TRANSACTIONS_FILE.name} ({len(simulated_df)} rows)")
-        except Exception as e:
-            print(f"Error saving simulated transactions: {e}")
+    # 5. Save simulated transactions
+    try:
+        simulated_df.to_csv(TRANSACTIONS_FILE, index=False)
+        print(f"   Simulated transactions saved to {TRANSACTIONS_FILE.name} ({len(simulated_df)} rows)")
+    except Exception as e:
+        print(f"Error saving simulated transactions: {e}")
 
-        print("--- Simulation Complete ---")
+    print("--- Simulation Complete ---")
 
-    if __name__ == "__main__":
+if __name__ == "__main__":
     main()
