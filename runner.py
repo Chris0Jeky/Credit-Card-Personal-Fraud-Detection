@@ -17,3 +17,11 @@ MERCHANT_CHECKER_SCRIPT = SCRIPTS_DIR / "merchant_checker.py"
 # MODEL_PCA_PREDICT_SCRIPT = ROOT_DIR / "models" / "predict_pca_fraud.py"
 # MODEL_SIMULATED_PREDICT_SCRIPT = ROOT_DIR / "models" / "predict_simulated_fraud.py"
 # ---
+
+def run_script(script_path, args=[], script_desc="script"):
+    """Runs a python script using subprocess and checks for errors."""
+    if not script_path.is_file():
+        print(f"Error: {script_desc} not found at {script_path}", file=sys.stderr)
+        return False
+
+    
