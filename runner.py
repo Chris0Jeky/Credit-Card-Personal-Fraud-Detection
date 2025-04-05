@@ -33,3 +33,13 @@ def run_script(script_path, args=[], script_desc="script"):
                             check=False)  # check=False allows us to handle errors manually
     end_time = time.time()
     print(f"<<< Finished {script_desc} in {end_time - start_time:.2f} seconds. Exit code: {result.returncode}")
+
+    if result.returncode != 0:
+        print(f"Error running {script_path.name}. Please check its output above.", file=sys.stderr)
+        # If output was captured (capture_output=True), print stderr:
+        # if result.stderr:
+        #     print("--- Error Output ---", file=sys.stderr)
+        #     print(result.stderr, file=sys.stderr)
+        #     print("--- End Error Output ---", file=sys.stderr)
+        return False
+    return True
