@@ -175,3 +175,9 @@ def simulate_transactions(account_details, source_df, num_transactions):
         except Exception as e:
             print(f"Error loading source dataset: {e}")
             return
+
+        # 4. Simulate transactions
+        print(f"Simulating {NUM_TRANSACTIONS_TO_SIMULATE} transactions...")
+        simulated_df = simulate_transactions(account, source_df, NUM_TRANSACTIONS_TO_SIMULATE)
+
+        
