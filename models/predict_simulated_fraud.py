@@ -136,7 +136,7 @@ def engineer_features(df, account_details=None):
     # Fill missing values with median
     for col in features.columns:
         if features[col].dtype in [np.float64, np.int64]:
-            features[col].fillna(features[col].median(), inplace=True)
+            features[col] = features[col].fillna(features[col].median())
     
     print(f"Engineered {len(features.columns)} features.")
     return features
@@ -172,10 +172,23 @@ def predict_fraud(model, X, transactions_df):
     """Use the model to predict fraud and return results."""
     print("Predicting fraud...")
     
-    # Get probability estimates
-    y_proba = model.predict_proba(X)[:, 1]  # Probability of fraud class
     # Predict class (0 = not fraud, 1 = fraud)
     y_pred = model.predict(X)
+    
+    # Get probability estimates - handle the case where there might only be one class
+    if len(model.classes_) > 1:
+        y_proba = model.predict_proba(X)[:, 1]  # Probability of fraud class
+    else:
+        # If only one class was found in training data, use a default probability
+        # This happens when all training examples have the same class
+        print("Warning: Model only has one class. Using decision function for probabilities.")
+        try:
+            # Try to use decision function if available
+            decision_scores = model.decision_function(X)
+            y_proba = 1 / (1 + np.exp(-decision_scores))  # Sigmoid to convert to probabilities
+        except:
+            print("Decision function not available, using prediction as probability")
+            y_proba = y_pred.astype(float)
     
     # Create results dataframe
     results_df = transactions_df.copy()
