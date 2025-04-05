@@ -10,5 +10,10 @@ SIMULATION_DIR = Path("../data/simulation_output")
 ACCOUNT_DETAILS_FILE = SIMULATION_DIR / "simulated_account_details.json"
 TRANSACTIONS_FILE = SIMULATION_DIR / "simulated_account_transactions.csv"
 
-
+# Rule Thresholds
+LOCATION_THRESHOLD_KM = 500  # Max distance from home for a 'normal' transaction
+HIGH_AMOUNT_THRESHOLD = 1000 # Example: Flag transactions over $1000
+RECENT_ACCOUNT_DAYS = 30     # Definition of a 'recent' account for velocity checks
+RECENT_ACCOUNT_HIGH_VELOCITY_THRESHOLD = 5 # Max transactions in 24h for recent account
+# ---
 
