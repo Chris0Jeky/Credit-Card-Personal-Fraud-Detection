@@ -146,3 +146,10 @@ def main():
 
         results.append(result_data)
 
+        if flags:
+            flagged_count += 1
+            print(f"\n--- Transaction {index} ({transaction['trans_num']}) ---")
+            print(f"  Timestamp: {transaction['trans_date_trans_time']}")
+            print(f"  Amount: {transaction['amt']:.2f}, Merchant: {transaction['merchant']}")
+            print(f"  !! Flags Triggered: {'; '.join(flags)}")
+
