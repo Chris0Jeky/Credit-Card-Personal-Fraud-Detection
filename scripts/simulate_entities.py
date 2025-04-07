@@ -5,24 +5,31 @@ import random
 import json
 import os
 from datetime import datetime, timedelta
+import argparse # <-- Add this import
+import sys
+
+# Import configuration
+try:
+    import config
+except ModuleNotFoundError:
+    print("Error: config.py not found. Make sure it's in the project root.")
+    sys.exit(1)
 
 # --- Configuration ---
-# Path to the dataset we'll sample transaction patterns from
-SOURCE_DATASET_PATH = Path(__file__).parent.parent / "Datasets" / "Credit Card Transactions Fraud Detection Dataset" / "fraudTrain.csv"
-# Directory to save the simulated data
-OUTPUT_DIR = Path(__file__).parent.parent / "data" / "simulation_output"
+SOURCE_DATASET_PATH = config.SOURCE_DATASET_PATH
+OUTPUT_DIR = config.SIMULATION_OUTPUT_DIR
+ACCOUNT_DETAILS_FILE = config.ACCOUNT_DETAILS_FILE
+TRANSACTIONS_FILE = config.TRANSACTIONS_FILE
 
-# Files to save
-ACCOUNT_DETAILS_FILE = OUTPUT_DIR / "simulated_account_details.json"
-TRANSACTIONS_FILE = OUTPUT_DIR / "simulated_account_transactions.csv"
+# Simulation parameters from config (can be overridden by args)
+DEFAULT_NUM_TRANSACTIONS = config.DEFAULT_NUM_TRANSACTIONS
+MIN_ACCOUNT_AGE_DAYS = config.MIN_ACCOUNT_AGE_DAYS
+MAX_ACCOUNT_AGE_DAYS = config.MAX_ACCOUNT_AGE_DAYS
+MIN_DAYS_BEFORE_FIRST_TRANS = config.MIN_DAYS_BEFORE_FIRST_TRANS
+MAX_DAYS_BEFORE_FIRST_TRANS = config.MAX_DAYS_BEFORE_FIRST_TRANS
 
-# Get number of transactions from environment variable or use default
-NUM_TRANSACTIONS_TO_SIMULATE = int(os.environ.get("NUM_TRANSACTIONS", 75)) # Generate a decent number of transactions
-MIN_ACCOUNT_AGE_DAYS = 60       # Account created between 60 days...
-MAX_ACCOUNT_AGE_DAYS = 365 * 2  # ...and 2 years ago
-MIN_DAYS_BEFORE_FIRST_TRANS = 1 # First transaction happens at least 1 day...
-MAX_DAYS_BEFORE_FIRST_TRANS = 30 # ...and up to 30 days after account creation
-# ---
+# --- Remove or comment out the old environment variable line ---
+# NUM_TRANSACTIONS_TO_SIMULATE = int(os.environ.get("NUM_TRANSACTIONS", 75))
 
 fake = Faker()
 
