@@ -91,12 +91,302 @@ def setup_visualizations(output_dir, style="whitegrid"):
     plt.rcParams["figure.figsize"] = (12, 8) # Default size
     return output_dir
 
-# --- Visualization Functions (Keep existing ones like amount, rules, time, distance) ---
-# (Include visualize_transaction_amounts, visualize_rule_violations,
-#  visualize_time_patterns, visualize_distance_patterns from previous version,
-#  adapting them to check if data['key'] exists before using it)
-# ... previous visualization functions go here ...
-# Make sure they use `data.get('key')` or check `if 'key' in data:`
+# --- Paste these functions into visualize_fraud.py ---
+# --- Place them after setup_visualizations() and before visualize_ml_results() ---
+
+def visualize_transaction_amounts(data, output_dir, format="png"):
+    """Create visualizations related to transaction amounts."""
+    df = data.get('transactions')
+    if df is None or 'amt' not in df.columns:
+        print("Skipping amount visualizations: Transaction data or 'amt' column missing.")
+        return
+
+    print("Creating transaction amount visualizations...")
+    # Transaction amount distribution
+    plt.figure(figsize=(12, 6))
+    sns.histplot(df['amt'], bins=30, kde=True)
+    plt.title('Transaction Amount Distribution')
+    plt.xlabel('Amount ($)')
+    plt.ylabel('Count')
+    plt.tight_layout()
+    plt.savefig(output_dir / f"transaction_amount_distribution.{format}")
+    plt.close()
+
+    # Transaction amount boxplot
+    plt.figure(figsize=(10, 6))
+    sns.boxplot(x=df['amt'])
+    plt.title('Transaction Amount Boxplot')
+    plt.xlabel('Amount ($)')
+    plt.tight_layout()
+    plt.savefig(output_dir / f"transaction_amount_boxplot.{format}")
+    plt.close()
+
+    # Log-scaled amount distribution (better for skewed data)
+    # Check for non-positive values before log scaling
+    if (df['amt'] > 0).any():
+        plt.figure(figsize=(12, 6))
+        sns.histplot(np.log1p(df.loc[df['amt'] > 0, 'amt']), bins=30, kde=True) # Use log1p and filter > 0
+        plt.title('Transaction Amount Distribution (Log-scaled)')
+        plt.xlabel('Log(Amount + 1)')
+        plt.ylabel('Count')
+        plt.tight_layout()
+        plt.savefig(output_dir / f"transaction_amount_log_distribution.{format}")
+        plt.close()
+    else:
+        print("   Skipping log amount distribution: No positive amounts found.")
+
+    print("Finished transaction amount visualizations.")
+
+def visualize_rule_violations(data, output_dir, format="png"):
+    """Create visualizations related to rule violations."""
+    df = data.get('flagged')
+    if df is None or 'rule_flags' not in df.columns:
+        print("Skipping rule violation visualizations: Flagged data or 'rule_flags' column missing.")
+        return
+
+    print("Creating rule violation visualizations...")
+
+    # Extract rule violation types
+    def extract_violations(flags_str):
+        if not isinstance(flags_str, str) or not flags_str:
+            return []
+        violations = []
+        # Improved regex to capture only the type after RULE_VIOLATION:
+        rule_pattern = r'RULE_VIOLATION:([A-Z_]+)'
+        matches = re.findall(rule_pattern, flags_str)
+        violations.extend([match.strip() for match in matches])
+        return violations
+
+    all_violations = []
+    for flags in df['rule_flags'].dropna():
+        all_violations.extend(extract_violations(flags))
+
+    if not all_violations:
+         print("   No specific RULE_VIOLATIONs found in flags to visualize.")
+         return
+
+    violation_counts = pd.Series(all_violations).value_counts()
+
+    # Rule violation bar chart
+    plt.figure(figsize=(14, 8))
+    violation_counts.plot(kind='bar', color='crimson')
+    plt.title('Rule Violation Counts')
+    plt.xlabel('Rule Type')
+    plt.ylabel('Count')
+    plt.xticks(rotation=45, ha='right')
+    plt.tight_layout()
+    plt.savefig(output_dir / f"rule_violation_counts.{format}")
+    plt.close()
+
+    # Amount analysis by rule type (if amount data available)
+    if 'amt' in df.columns:
+        rule_amt_data = []
+        for _, row in df.iterrows():
+            violations = extract_violations(row['rule_flags'])
+            if violations and pd.notna(row['amt']):
+                for violation in violations:
+                    rule_amt_data.append({
+                        'rule_type': violation,
+                        'amount': row['amt']
+                    })
+
+        if rule_amt_data:
+            rule_amt_df = pd.DataFrame(rule_amt_data)
+            # Box plot of amount by rule type
+            plt.figure(figsize=(16, 10))
+            sns.boxplot(x='rule_type', y='amount', data=rule_amt_df)
+            plt.title('Transaction Amount by Rule Violation Type')
+            plt.xlabel('Rule Type')
+            plt.ylabel('Amount ($)')
+            plt.xticks(rotation=45, ha='right')
+            plt.tight_layout()
+            plt.savefig(output_dir / f"amount_by_rule_type.{format}")
+            plt.close()
+
+    print("Finished rule violation visualizations.")
+
+
+def visualize_time_patterns(data, output_dir, format="png"):
+    """Create visualizations related to time patterns."""
+    df = data.get('transactions')
+    if df is None or 'trans_date_trans_time' not in df.columns:
+        print("Skipping time pattern visualizations: Transaction data or timestamp column missing.")
+        return
+
+    print("Creating time pattern visualizations...")
+    df = df.copy() # Avoid SettingWithCopyWarning
+
+    # Convert timestamp to datetime robustly
+    try:
+        df['trans_datetime'] = pd.to_datetime(df['trans_date_trans_time'], errors='coerce')
+        df.dropna(subset=['trans_datetime'], inplace=True) # Drop rows where conversion failed
+        if df.empty:
+            print("   No valid timestamps found after conversion.")
+            return
+        df['hour'] = df['trans_datetime'].dt.hour
+        df['day_of_week'] = df['trans_datetime'].dt.dayofweek # Monday=0, Sunday=6
+        df['date'] = df['trans_datetime'].dt.date
+    except Exception as e:
+        print(f"Error processing timestamps: {e}")
+        return
+
+    # Transactions by hour of day
+    plt.figure(figsize=(12, 6))
+    sns.countplot(x='hour', data=df, color='steelblue', order=range(24)) # Ensure all hours shown
+    plt.title('Transactions by Hour of Day')
+    plt.xlabel('Hour (0-23)')
+    plt.ylabel('Number of Transactions')
+    plt.xticks(range(0, 24, 2))
+    plt.tight_layout()
+    plt.savefig(output_dir / f"transactions_by_hour.{format}")
+    plt.close()
+
+    # Transactions by day of week
+    plt.figure(figsize=(10, 6))
+    day_names = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    sns.countplot(x='day_of_week', data=df, color='lightseagreen', order=range(7))
+    plt.title('Transactions by Day of Week')
+    plt.xlabel('Day of Week')
+    plt.ylabel('Number of Transactions')
+    plt.xticks(range(7), day_names)
+    plt.tight_layout()
+    plt.savefig(output_dir / f"transactions_by_day.{format}")
+    plt.close()
+
+    # Transaction volume over time (if multiple dates exist)
+    if df['date'].nunique() > 1:
+        daily_counts = df.groupby('date').size()
+        plt.figure(figsize=(14, 6))
+        daily_counts.plot(kind='line', marker='.', linestyle='-')
+        plt.title('Daily Transaction Volume')
+        plt.xlabel('Date')
+        plt.ylabel('Number of Transactions')
+        plt.grid(True, alpha=0.5)
+        plt.tight_layout()
+        # Format x-axis for readability if range is large
+        if (df['date'].max() - df['date'].min()).days > 30:
+             plt.gca().xaxis.set_major_locator(plt.MaxNLocator(10)) # Limit number of date ticks
+             plt.gcf().autofmt_xdate() # Auto-rotate dates
+        plt.savefig(output_dir / f"daily_transaction_volume.{format}")
+        plt.close()
+    else:
+        print("   Skipping daily volume plot: Only one transaction date found.")
+
+    # Time patterns of flagged transactions (requires flagged data)
+    flagged_df = data.get('flagged')
+    if flagged_df is not None and 'rule_triggered' in flagged_df.columns and 'trans_date_trans_time' in flagged_df.columns:
+        flagged_df = flagged_df.copy()
+        try:
+            flagged_df['trans_datetime'] = pd.to_datetime(flagged_df['trans_date_trans_time'], errors='coerce')
+            flagged_df.dropna(subset=['trans_datetime'], inplace=True)
+            if not flagged_df.empty:
+                flagged_df['hour'] = flagged_df['trans_datetime'].dt.hour
+
+                # Ensure rule_triggered is numeric (0 or 1)
+                flagged_df['rule_triggered'] = pd.to_numeric(flagged_df['rule_triggered'], errors='coerce').fillna(0).astype(int)
+
+                # Flagged transactions by hour (Rate)
+                hourly_flags = flagged_df.groupby('hour')['rule_triggered'].agg(['sum', 'count'])
+                hourly_flags['flag_rate'] = (hourly_flags['sum'] / hourly_flags['count']) * 100
+
+                plt.figure(figsize=(14, 7))
+                hourly_flags['flag_rate'].plot(kind='bar', color='darkorange')
+                plt.title('Percentage of Rule-Triggered Transactions by Hour')
+                plt.xlabel('Hour of Day')
+                plt.ylabel('Percentage Triggered (%)')
+                plt.ylim(0, 100)
+                plt.grid(axis='y', linestyle='--')
+                plt.xticks(range(0, 24, 2))
+                plt.tight_layout()
+                plt.savefig(output_dir / f"flagged_by_hour_rate.{format}")
+                plt.close()
+        except Exception as e:
+            print(f"   Warning: Could not plot flagged time patterns: {e}")
+
+    print("Finished time pattern visualizations.")
+
+
+def visualize_distance_patterns(data, output_dir, format="png"):
+    """Create visualizations related to transaction distances from home."""
+    # Requires merged/consistent data with coords and potentially flags
+    df = data.get('flagged', data.get('transactions')) # Prefer flagged, fallback to raw
+    if df is None:
+        print("Skipping distance visualizations: No transaction data found.")
+        return
+
+    # Check if we have location data needed for distance calc
+    required_cols = ['merch_lat', 'merch_long', 'lat', 'long']
+    if not all(col in df.columns for col in required_cols):
+        print("Skipping distance visualizations: Coordinate columns missing.")
+        return
+
+    print("Creating distance pattern visualizations...")
+    df = df.copy()
+
+    # Calculate distances from home
+    # Use the same robust function from check_rules.py
+    from geopy.distance import geodesic # Need geopy here too
+    import re # Need re here too
+
+    def calculate_distance_viz(row):
+        # Avoid NameError by defining the helper inside or importing globally
+        if pd.isna(row.get('merch_lat')) or pd.isna(row.get('merch_long')) or pd.isna(row.get('lat')) or pd.isna(row.get('long')):
+            return np.nan
+        try:
+            return geodesic((float(row['lat']), float(row['long'])), (float(row['merch_lat']), float(row['merch_long']))).km
+        except ValueError:
+            return np.nan # Handle potential errors during conversion or calc
+
+    df['distance_km'] = df.apply(calculate_distance_viz, axis=1)
+
+    # Drop rows where distance couldn't be calculated
+    df_dist = df.dropna(subset=['distance_km']).copy()
+    if df_dist.empty:
+        print("   No valid distances calculated to visualize.")
+        return
+
+    # Distance distribution
+    plt.figure(figsize=(12, 6))
+    sns.histplot(df_dist['distance_km'], bins=30, kde=True)
+    plt.title('Transaction Distance from Home Distribution')
+    plt.xlabel('Distance (km)')
+    plt.ylabel('Count')
+    plt.tight_layout()
+    plt.savefig(output_dir / f"distance_distribution.{format}")
+    plt.close()
+
+    # Distance vs Amount scatter plot
+    if 'amt' in df_dist.columns:
+        plt.figure(figsize=(12, 8))
+        sns.scatterplot(x='distance_km', y='amt', data=df_dist, alpha=0.7)
+        plt.title('Transaction Amount vs Distance from Home')
+        plt.xlabel('Distance (km)')
+        plt.ylabel('Amount ($)')
+        plt.grid(True, alpha=0.3)
+        plt.tight_layout()
+        plt.savefig(output_dir / f"amount_vs_distance.{format}")
+        plt.close()
+
+    # Distance patterns by rule trigger status (if available)
+    if 'rule_triggered' in df_dist.columns:
+        df_dist['rule_triggered'] = pd.to_numeric(df_dist['rule_triggered'], errors='coerce').fillna(0).astype(int)
+        flagged = df_dist[df_dist['rule_triggered'] == 1]['distance_km']
+        unflagged = df_dist[df_dist['rule_triggered'] == 0]['distance_km']
+
+        plt.figure(figsize=(14, 7))
+        sns.histplot(unflagged, color="blue", label="Not Triggered", kde=True, alpha=0.5, bins=20)
+        sns.histplot(flagged, color="red", label="Rule Triggered", kde=True, alpha=0.5, bins=20)
+        plt.title('Transaction Distance by Rule Trigger Status')
+        plt.xlabel('Distance (km)')
+        plt.ylabel('Count')
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(output_dir / f"distance_by_rule_status.{format}")
+        plt.close()
+
+    print("Finished distance pattern visualizations.")
+
+# --- End of missing functions ---
 
 # --- Updated/New Visualization Functions ---
 
