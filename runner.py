@@ -44,18 +44,18 @@ def run_script(script_path, args=[], script_desc="script"):
         print(f"Error: Could not determine module path for {script_path} relative to {root_dir}", file=sys.stderr)
         return False
 
-    command = [sys.executable, str(script_path)] + args
-    print(f"\n>>> Running {script_desc}: {' '.join(map(str, command))}") # Ensure args are strings
+    # --- Use python -m module.path ---
+    command = [sys.executable, "-m", module_path] + [str(a) for a in args]  # Ensure all args are strings
+    # ---
+    print(f"\n>>> Running {script_desc}: {' '.join(command)}")
     start_time = time.time()
-    # Use text=True for automatic encoding/decoding
-    # Use capture_output=False to see the script's output in real-time
-    result = subprocess.run(command, text=True, capture_output=False, check=False)
+    result = subprocess.run(command, text=True, capture_output=False, check=False,
+                            cwd=root_dir)  # Explicitly set working directory to root
     end_time = time.time()
     print(f"<<< Finished {script_desc} in {end_time - start_time:.2f} seconds. Exit code: {result.returncode}")
 
     if result.returncode != 0:
-        print(f"Error running {script_path.name}. Check output above.", file=sys.stderr)
-        # Consider adding more specific error handling if needed
+        print(f"Error running module {module_path}. Check output above.", file=sys.stderr)
         return False
     return True
 
