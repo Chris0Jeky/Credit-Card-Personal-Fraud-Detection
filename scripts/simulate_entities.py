@@ -5,7 +5,7 @@ import random
 import json
 import os
 from datetime import datetime, timedelta
-import argparse 
+import argparse
 import sys
 
 # Import configuration
@@ -146,6 +146,17 @@ def simulate_transactions(account_details, source_df, num_transactions):
         col_order = list(source_df.columns)  # Try to match source
 
     return pd.DataFrame(simulated_data, columns=col_order)
+
+def parse_arguments():
+    """Parse command line arguments."""
+    parser = argparse.ArgumentParser(description="Simulate Credit Card Account and Transactions")
+    parser.add_argument(
+        "--transactions",
+        type=int,
+        default=DEFAULT_NUM_TRANSACTIONS,
+        help="Number of transactions to simulate"
+    )
+    return parser.parse_args()
 
 def main():
     """Main simulation logic."""
