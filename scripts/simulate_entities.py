@@ -160,10 +160,14 @@ def parse_arguments():
 
 def main():
     """Main simulation logic."""
-    print("--- Starting Entity Simulation ---")
+    args = parse_arguments() # <-- Parse arguments here
+    num_transactions_to_simulate = args.transactions # <-- Use the argument value
 
-    # 1. Ensure output directory exists
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    print("--- Starting Entity Simulation ---")
+    print(f"Simulating {num_transactions_to_simulate} transactions...")
+
+    # 1. Ensure output directory exists (already done by config.py)
+    # OUTPUT_DIR.mkdir(parents=True, exist_ok=True) # Not strictly needed if config handles it
     print(f"Output directory: {OUTPUT_DIR.resolve()}")
 
     # 2. Create simulated account
@@ -190,15 +194,15 @@ def main():
             source_df = pd.read_csv(SOURCE_DATASET_PATH)
         print(f"   Loaded {len(source_df)} source transactions.")
     except FileNotFoundError:
-        print(f"Error: Source dataset not found at {SOURCE_DATASET_PATH}")
-        return
+        print(f"Error: Source dataset not found at {SOURCE_DATASET_PATH}", file=sys.stderr)
+        sys.exit(1)
     except Exception as e:
         print(f"Error loading source dataset: {e}")
         return
 
     # 4. Simulate transactions
-    print(f"Simulating {NUM_TRANSACTIONS_TO_SIMULATE} transactions...")
-    simulated_df = simulate_transactions(account, source_df, NUM_TRANSACTIONS_TO_SIMULATE)
+    print(f"Simulating {num_transactions_to_simulate} transactions...")  
+    simulated_df = simulate_transactions(account, source_df, num_transactions_to_simulate)
 
     # 5. Save simulated transactions
     try:
