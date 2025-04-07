@@ -33,6 +33,17 @@ def run_script(script_path, args=[], script_desc="script"):
         print(f"Error: {script_desc} script not found at {script_path}", file=sys.stderr)
         return False
 
+    # --- Convert script path to module path ---
+    try:
+        # Get path relative to project root (assuming runner.py is in root)
+        root_dir = Path(__file__).parent
+        relative_path = script_path.relative_to(root_dir)
+        # Remove '.py' suffix and replace path separators with dots
+        module_path = str(relative_path.with_suffix('')).replace(os.path.sep, '.')
+    except ValueError:
+        print(f"Error: Could not determine module path for {script_path} relative to {root_dir}", file=sys.stderr)
+        return False
+
     command = [sys.executable, str(script_path)] + args
     print(f"\n>>> Running {script_desc}: {' '.join(map(str, command))}") # Ensure args are strings
     start_time = time.time()
