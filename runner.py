@@ -28,9 +28,9 @@ MODEL_RF_PREDICT_SCRIPT = config.MODEL_RF_PREDICT_SCRIPT
 # ---
 
 def run_script(script_path, args=[], script_desc="script"):
-    """Runs a python script using subprocess and checks for errors."""
+    """Runs a python script using subprocess as a module and checks for errors."""
     if not script_path.is_file():
-        print(f"Error: {script_desc} not found at {script_path}", file=sys.stderr)
+        print(f"Error: {script_desc} script not found at {script_path}", file=sys.stderr)
         return False
 
     command = [sys.executable, str(script_path)] + args
