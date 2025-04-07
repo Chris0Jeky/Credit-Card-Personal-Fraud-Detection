@@ -201,7 +201,7 @@ def main():
         return
 
     # 4. Simulate transactions
-    print(f"Simulating {num_transactions_to_simulate} transactions...")  
+    print(f"Simulating {num_transactions_to_simulate} transactions...")
     simulated_df = simulate_transactions(account, source_df, num_transactions_to_simulate)
 
     # 5. Save simulated transactions
