@@ -14,6 +14,7 @@ import argparse
 import json
 import os
 from datetime import datetime
+import re
 
 # Import configuration
 try:
