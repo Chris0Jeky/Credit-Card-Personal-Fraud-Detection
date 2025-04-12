@@ -25,6 +25,7 @@ EVALUATE_SCRIPT = config.EVALUATE_SCRIPT
 INTEGRATE_SCRIPT = config.INTEGRATE_SCRIPT
 MODEL_PCA_PREDICT_SCRIPT = config.MODEL_PCA_PREDICT_SCRIPT
 MODEL_RF_PREDICT_SCRIPT = config.MODEL_RF_PREDICT_SCRIPT
+REPORT_SCRIPT = config.SCRIPTS_DIR / "generate_transaction_report.py" # Added report script path
 # ---
 
 def run_script(script_path, args=[], script_desc="script"):
@@ -73,6 +74,7 @@ def parse_arguments():
     parser.add_argument("--evaluate-only", action="store_true", help="Run only performance evaluation")
     parser.add_argument("--analyze-only", action="store_true", help="Run only flag analysis")
     parser.add_argument("--visualize-only", action="store_true", help="Run only visualization")
+    parser.add_argument("--report-only", action="store_true", help="Run only transaction report generation")
     parser.add_argument("--full-run", action="store_true", help="Run all steps (default if no specific step chosen)")
 
     # Simulation parameters
@@ -126,7 +128,7 @@ def main():
     # --- Determine Workflow Steps ---
     run_all = args.full_run or not any([
         args.simulate_only, args.check_only, args.ml_only, args.integrate_only,
-        args.evaluate_only, args.analyze_only, args.visualize_only
+        args.evaluate_only, args.analyze_only, args.visualize_only, args.report_only
     ])
 
     run_simulate = run_all or args.simulate_only
@@ -134,8 +136,9 @@ def main():
     run_ml = run_all or args.ml_only
     run_integrate = run_all or args.integrate_only
     run_evaluate = run_all or args.evaluate_only
-    run_analyze = run_all or args.analyze_only # Flag analysis focuses on rules now
+    run_analyze = run_all or args.analyze_only
     run_visualize = run_all or args.visualize_only
+    run_report = run_all or args.report_only
 
     print("\n--- Workflow Steps Activated ---")
     print(f"Simulate Data: {run_simulate}")
@@ -145,6 +148,7 @@ def main():
     print(f"Evaluate Performance: {run_evaluate}")
     print(f"Analyze Rule Flags: {run_analyze}")
     print(f"Generate Visualizations: {run_visualize}")
+    print(f"Generate Transaction Report: {run_report}")
     print("=" * 30)
 
     workflow_start_time = time.time()
@@ -269,9 +273,21 @@ def main():
             else:
                 print(f"\nVisualization report created in {config.VISUALIZATIONS_DIR}")
 
+    # Step 8: Generate Transaction Report
+    if run_report and pipeline_successful:
+        print("\n--- Step 8: Generating Transaction Report ---")
+        if not config.INTEGRATED_ASSESSMENT_FILE.exists():
+            print(f"Error: Integrated assessment file {config.INTEGRATED_ASSESSMENT_FILE.name} not found. Cannot generate report.", file=sys.stderr)
+        elif not config.ACCOUNT_DETAILS_FILE.exists():
+            print(f"Error: Account details file {config.ACCOUNT_DETAILS_FILE.name} not found. Cannot generate report.", file=sys.stderr)
+        elif not run_script(REPORT_SCRIPT, script_desc="Transaction Reporter"):
+            print("\nWarning: Transaction report generation failed.", file=sys.stderr)
+        else:
+            print(f"\nTransaction report generated successfully.")
+
     # --- Optional: Merchant Check Examples (if not checking specific merchant) ---
     if not args.check_merchant and run_all: # Only run examples on a full default run
-        print("\n--- Step 8 (Optional): Running Merchant Checker Examples ---")
+        print("\n--- Step 9 (Optional): Running Merchant Checker Examples ---")
         # Example: Check a known legit name and a potentially fake one
         run_script(MERCHANT_CHECKER_SCRIPT, ["Amazon"], script_desc="Merchant Check (Example Legit)")
         run_script(MERCHANT_CHECKER_SCRIPT, ["fraud_Definitely_Fake_LLC"], script_desc="Merchant Check (Example Fake)")
