@@ -8,6 +8,7 @@ Evaluates the performance of different fraud detection components:
 """
 
 import pandas as pd
+import numpy as np
 from pathlib import Path
 import sys
 import json
@@ -186,46 +187,58 @@ def main():
     if 'rule_triggered' not in eval_df.columns:
         print("Error: 'rule_triggered' column not found in flagged data. Cannot evaluate rules.", file=sys.stderr)
     else:
-        y_pred_rules = eval_df['rule_triggered']
+        y_pred_rules = eval_df['rule_triggered'].astype(int)  # Ensure integer type
         # Rules don't have a score, so AUPRC is not applicable directly
         evaluation_results['rules'] = calculate_metrics(y_true, y_pred_rules)
         print(f"   F1 Score: {evaluation_results['rules']['f1_score']}")
 
     # 2. PCA/Isolation Forest Model
     print("\nEvaluating PCA/Isolation Forest Model...")
-    y_pred_pca = eval_df['anomaly']
-    # Use negative anomaly score for PR curve (lower score = more anomalous)
-    y_score_pca = -eval_df['anomaly_score']
-    evaluation_results['pca_isolation_forest'] = calculate_metrics(y_true, y_pred_pca, y_score_pca)
-    print(f"   F1 Score: {evaluation_results['pca_isolation_forest']['f1_score']}")
-    print(f"   AUPRC: {evaluation_results['pca_isolation_forest']['auprc']}")
-    if args.plot:
-        plot_pr_curve(evaluation_results['pca_isolation_forest']['pr_curve_data'],
-                      "PCA Isolation Forest", config.VISUALIZATIONS_DIR)
+    if 'anomaly' in eval_df.columns and 'anomaly_score' in eval_df.columns:
+        y_pred_pca = eval_df['anomaly'].astype(int)  # Ensure integer type
+        # Use negative anomaly score for PR curve (lower score = more anomalous)
+        y_score_pca = -eval_df['anomaly_score']
+        evaluation_results['pca_isolation_forest'] = calculate_metrics(y_true, y_pred_pca, y_score_pca)
+        print(f"   F1 Score: {evaluation_results['pca_isolation_forest']['f1_score']}")
+        print(f"   AUPRC: {evaluation_results['pca_isolation_forest']['auprc']}")
+        if args.plot and evaluation_results['pca_isolation_forest'].get('pr_curve_data'):
+            plot_pr_curve(evaluation_results['pca_isolation_forest']['pr_curve_data'],
+                        "PCA Isolation Forest", config.VISUALIZATIONS_DIR)
+    else:
+        print("   Skipping PCA evaluation: Required columns ('anomaly', 'anomaly_score') not found after merge.")
+        evaluation_results['pca_isolation_forest'] = {'error': 'Missing columns'}
 
     # 3. Random Forest Model
     print("\nEvaluating Random Forest Model...")
-    y_pred_rf = eval_df['predicted_fraud']
-    y_score_rf = eval_df['fraud_probability']
-    evaluation_results['random_forest'] = calculate_metrics(y_true, y_pred_rf, y_score_rf)
-    print(f"   F1 Score: {evaluation_results['random_forest']['f1_score']}")
-    print(f"   AUPRC: {evaluation_results['random_forest']['auprc']}")
-    if args.plot:
-         plot_pr_curve(evaluation_results['random_forest']['pr_curve_data'],
-                       "Random Forest", config.VISUALIZATIONS_DIR)
+    if 'predicted_fraud' in eval_df.columns and 'fraud_probability' in eval_df.columns:
+        y_pred_rf = eval_df['predicted_fraud'].astype(int)  # Ensure integer type
+        y_score_rf = eval_df['fraud_probability']
+        evaluation_results['random_forest'] = calculate_metrics(y_true, y_pred_rf, y_score_rf)
+        print(f"   F1 Score: {evaluation_results['random_forest']['f1_score']}")
+        print(f"   AUPRC: {evaluation_results['random_forest']['auprc']}")
+        if args.plot and evaluation_results['random_forest'].get('pr_curve_data'):
+            plot_pr_curve(evaluation_results['random_forest']['pr_curve_data'],
+                        "Random Forest", config.VISUALIZATIONS_DIR)
+    else:
+        print("   Skipping RF evaluation: Required columns ('predicted_fraud', 'fraud_probability') not found after merge.")
+        evaluation_results['random_forest'] = {'error': 'Missing columns'}
 
     # 4. Integrated Risk Score (if available)
     if 'risk_score' in eval_df.columns and 'risk_level' in eval_df.columns:
         print("\nEvaluating Integrated Risk Score...")
-        # Define prediction based on 'High' risk level for standard metrics
-        y_pred_integrated = (eval_df['risk_level'] == 'High').astype(int)
-        y_score_integrated = eval_df['risk_score']
-        evaluation_results['integrated_score'] = calculate_metrics(y_true, y_pred_integrated, y_score_integrated)
-        print(f"   F1 Score (High Risk Threshold): {evaluation_results['integrated_score']['f1_score']}")
-        print(f"   AUPRC: {evaluation_results['integrated_score']['auprc']}")
-        if args.plot:
-            plot_pr_curve(evaluation_results['integrated_score']['pr_curve_data'],
-                          "Integrated Score", config.VISUALIZATIONS_DIR)
+        try:
+            # Define prediction based on 'High' risk level for standard metrics
+            y_pred_integrated = (eval_df['risk_level'] == 'High').astype(int)
+            y_score_integrated = eval_df['risk_score']
+            evaluation_results['integrated_score'] = calculate_metrics(y_true, y_pred_integrated, y_score_integrated)
+            print(f"   F1 Score (High Risk Threshold): {evaluation_results['integrated_score']['f1_score']}")
+            print(f"   AUPRC: {evaluation_results['integrated_score']['auprc']}")
+            if args.plot and evaluation_results['integrated_score'].get('pr_curve_data'):
+                plot_pr_curve(evaluation_results['integrated_score']['pr_curve_data'],
+                            "Integrated Score", config.VISUALIZATIONS_DIR)
+        except Exception as e:
+            print(f"   Error evaluating integrated score: {e}")
+            evaluation_results['integrated_score'] = {'error': str(e)}
 
     # --- Save Results ---
     print(f"\nSaving evaluation report to {config.EVALUATION_REPORT_FILE}...")
