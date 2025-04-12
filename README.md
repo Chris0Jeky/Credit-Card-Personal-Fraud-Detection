@@ -42,6 +42,23 @@ The current implementation trains the Machine Learning models (PCA/Isolation For
 
 Therefore, the current ML results should be viewed as illustrative of the *pipeline's capability* rather than indicative of real-world fraud detection performance. The evaluation metrics generated reflect performance *only on this specific, limited simulation*.
 
+## Output Files
+
+The pipeline generates several output files in the `data/simulation_output/` directory:
+
+* **simulated_account_details.json**: Account information for the simulated user
+* **simulated_account_transactions.csv**: Raw simulated transactions
+* **simulated_transactions_with_flags.csv**: Transactions with rule-based flags
+* **pca_fraud_predictions.csv**: PCA/Isolation Forest model predictions
+* **simulated_fraud_predictions.csv**: Random Forest model predictions
+* **integrated_fraud_assessment.csv**: Combined results with risk scores
+* **evaluation_report.json**: Performance metrics for all detection methods
+* **flag_analysis.json**: Analysis of rule violations
+* **transaction_report.txt**: Human-readable transaction-by-transaction report
+* **transaction_report.json**: JSON version of the transaction report
+* **visualizations/**: Directory containing data visualizations
+* **visualization_report.html**: HTML report linking all visualizations
+
 ## Components
 
 ### Configuration
