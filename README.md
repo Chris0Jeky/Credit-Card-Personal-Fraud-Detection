@@ -13,6 +13,7 @@ This project provides a pipeline for:
 5.  **Evaluating** the performance of each detection component against ground truth labels (`is_fraud` flag from the source dataset).
 6.  Checking **merchant legitimacy** against a predefined list.
 7.  **Analyzing** and **visualizing** transaction patterns, rule violations, ML predictions, evaluation metrics, and integrated risk scores.
+8.  Generating user-friendly **transaction reports** summarizing the fraud analysis results for each transaction.
 
 ## ML Model Training Approach (Important Note)
 
@@ -23,6 +24,11 @@ The current implementation trains the Machine Learning models (PCA/Isolation For
 *   **Demonstration:** It allows the ML components to run within the self-contained pipeline using the generated data, demonstrating the *concept* of applying ML.
 *   **Proof-of-Concept:** It fulfills the requirement of having ML models integrated without needing external, pre-trained models for this stage.
 *   **Potential for Adaptation (Conceptual):** One could imagine such a system adapting over time to a user's specific spending patterns, although this requires more sophisticated online learning techniques not implemented here.
+
+**Important Notes for Better Results:**
+
+*   **Larger Sample Size:** Increasing the number of transactions (e.g., `--transactions 1000`) significantly improves the chances of capturing fraud examples in the simulation, which is crucial for the Random Forest model to learn meaningful patterns.
+*   **Model Training:** The pipeline now forces retraining on each run to avoid feature mismatch issues between different runs.
 
 **Critical Limitations:**
 
@@ -75,6 +81,7 @@ Therefore, the current ML results should be viewed as illustrative of the *pipel
 
 *   `scripts/analyze_flags.py`: Analyzes rule violations and transaction patterns (focused on rules). Outputs `flag_analysis.json`.
 *   `scripts/visualize_fraud.py`: Generates data visualizations (distributions, time/distance patterns, ML results, evaluation metrics, integrated scores) and creates `visualization_report.html`.
+*   `scripts/generate_transaction_report.py`: Creates user-friendly transaction-by-transaction fraud analysis reports in both text and JSON formats.
 
 ## Getting Started
 
@@ -93,6 +100,14 @@ Therefore, the current ML results should be viewed as illustrative of the *pipel
     *   python-Levenshtein (recommended for faster fuzzy matching)
     *   # PyYAML (if using YAML for config instead of .py)
 
+### Quick Setup
+
+1. Clone this repository
+2. Install the required packages: `pip install -r requirements.txt`
+3. Ensure the required directory structure exists (handled by `config.py`)
+4. Run the complete pipeline: `python runner.py --full-run --transactions 500`
+5. View generated reports in the `data/simulation_output/` directory
+
 ### Running the Pipeline
 
 ```bash
@@ -100,6 +115,9 @@ Therefore, the current ML results should be viewed as illustrative of the *pipel
 
 # Run the full workflow with default settings (75 transactions)
 python runner.py --full-run
+
+# Run with more transactions to improve ML model training (recommended)
+python runner.py --full-run --transactions 1000
 
 # Run only simulation (e.g., 100 transactions)
 python runner.py --simulate-only --transactions 100
@@ -115,6 +133,9 @@ python runner.py --integrate-only
 
 # Generate visualizations only (uses existing results)
 python runner.py --visualize-only --viz-format svg
+
+# Generate transaction reports only (uses existing integrated results)
+python runner.py --report-only
 
 # Check a specific merchant (runs independently)
 python runner.py --check-merchant "Starbucks"
