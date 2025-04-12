@@ -1,0 +1,1732 @@
+{
+  "report_date": "2025-04-12T18:42:41.484292",
+  "total_transactions": 75,
+  "suspicious_count": 0,
+  "transactions": [
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_a875dcbc-d28c-4162-b99e-6a49d79989ac",
+        "Date/Time": "2023-12-21 02:17:35",
+        "Merchant": "fraud_Bogisich Inc",
+        "Amount": "$216.60",
+        "Category": "grocery_pos"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (15330km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (9 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "Yes",
+        "Anomaly Score": "-0.0893",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Medium",
+        "Risk Score": "0.5680"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_62bb5e78-2417-4e10-8b9a-1f4ec26720c2",
+        "Date/Time": "2023-12-17 21:11:38",
+        "Merchant": "fraud_Moore, Dibbert and Koepp",
+        "Amount": "$272.40",
+        "Category": "misc_net"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (15308km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (7 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "Yes",
+        "Anomaly Score": "-0.0881",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Medium",
+        "Risk Score": "0.5642"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_5e85d023-4c02-489c-b4f7-68a7f9a0ec5e",
+        "Date/Time": "2023-12-19 14:19:03",
+        "Merchant": "fraud_Volkman PLC",
+        "Amount": "$31.60",
+        "Category": "food_dining"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (13049km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (8 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "Yes",
+        "Anomaly Score": "-0.0636",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Medium",
+        "Risk Score": "0.4907"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_e291ecb8-8471-4866-b0a6-88fdeec38b06",
+        "Date/Time": "2023-12-24 06:40:24",
+        "Merchant": "fraud_Weimann-Lockman",
+        "Amount": "$70.00",
+        "Category": "kids_pets"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (15755km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (10 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "Yes",
+        "Anomaly Score": "-0.0005",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3016"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_80c2660d-7ac8-4cf9-af8c-0ded26cb420a",
+        "Date/Time": "2023-12-16 05:39:43",
+        "Merchant": "fraud_Conroy, Balistreri and Gorczany",
+        "Amount": "$73.81",
+        "Category": "health_fitness"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14281km > 500km)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.2005",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_be8cc251-c36a-4fcd-ab86-aa0e90bb1ebb",
+        "Date/Time": "2023-12-16 07:21:49",
+        "Merchant": "fraud_Fisher Inc",
+        "Amount": "$77.71",
+        "Category": "shopping_net"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14281km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (6 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.1860",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_c54b87d0-4281-4ff1-a5c0-c4e6b123ae62",
+        "Date/Time": "2023-12-16 10:53:07",
+        "Merchant": "fraud_Friesen-Stamm",
+        "Amount": "$48.07",
+        "Category": "gas_transport"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14526km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (7 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.0967",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_38bd130e-4972-4956-9139-96ec27371636",
+        "Date/Time": "2023-12-16 02:31:35",
+        "Merchant": "fraud_Pacocha-Bauch",
+        "Amount": "$1.85",
+        "Category": "shopping_pos"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (13890km > 500km)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.1425",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_0493fd15-29af-42ae-a473-38feb510d5a2",
+        "Date/Time": "2023-12-15 19:22:19",
+        "Merchant": "fraud_Pouros, Walker and Spencer",
+        "Amount": "$1.53",
+        "Category": "kids_pets"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14345km > 500km)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.2157",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_563ec1ea-b2c1-44dd-a6de-2f0847145786",
+        "Date/Time": "2023-12-15 20:09:06",
+        "Merchant": "fraud_Runolfsson and Sons",
+        "Amount": "$71.09",
+        "Category": "grocery_net"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14773km > 500km)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.1920",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_0a5d8a43-e301-4056-ac77-2e5640725ddb",
+        "Date/Time": "2023-12-16 00:10:12",
+        "Merchant": "fraud_Kuhic LLC",
+        "Amount": "$90.83",
+        "Category": "shopping_net"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14103km > 500km)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.1425",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_bc334627-2e52-4b64-9ae8-60ff26287935",
+        "Date/Time": "2023-12-16 22:00:35",
+        "Merchant": "fraud_Fahey Inc",
+        "Amount": "$8.50",
+        "Category": "kids_pets"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14975km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (9 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.2094",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_6ee89db3-930c-4ec0-992c-97b99e099ab8",
+        "Date/Time": "2023-12-16 20:04:14",
+        "Merchant": "fraud_Dickinson-Rempel",
+        "Amount": "$36.70",
+        "Category": "misc_pos"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (15192km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (9 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.0696",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_cf168e9b-51eb-4285-87b0-3ce6c00fbf12",
+        "Date/Time": "2023-12-16 16:19:58",
+        "Merchant": "fraud_Marks Inc",
+        "Amount": "$65.08",
+        "Category": "gas_transport"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14811km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (9 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.1952",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_dc14b77e-73f2-47df-a5f1-ec7da8cd1a4c",
+        "Date/Time": "2023-12-16 11:52:50",
+        "Merchant": "fraud_Johns Inc",
+        "Amount": "$5.03",
+        "Category": "entertainment"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14932km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (8 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.2016",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_a83de423-f20f-47ca-a69c-7e8b16d594d9",
+        "Date/Time": "2023-12-17 10:50:53",
+        "Merchant": "fraud_Daugherty-Thompson",
+        "Amount": "$22.21",
+        "Category": "food_dining"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (15013km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (9 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.1946",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_d371d4a0-04b0-4d2e-b888-82cb65f72b64",
+        "Date/Time": "2023-12-17 15:35:04",
+        "Merchant": "fraud_Eichmann-Russel",
+        "Amount": "$6.90",
+        "Category": "misc_pos"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14117km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (8 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.2013",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_6c61aabc-31b6-4009-a37a-1ac842ee7b4a",
+        "Date/Time": "2023-12-17 06:41:42",
+        "Merchant": "fraud_Kemmer-Buckridge",
+        "Amount": "$37.31",
+        "Category": "misc_pos"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (15376km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (9 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.1260",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_078b0a78-b861-4e36-ae63-7eaa5d0d7fdf",
+        "Date/Time": "2023-12-17 03:08:05",
+        "Merchant": "fraud_Weimann-Lockman",
+        "Amount": "$55.70",
+        "Category": "kids_pets"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14451km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (8 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.1995",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_f524302e-ffb2-45e5-9eec-c4cb43911c76",
+        "Date/Time": "2023-12-18 12:13:52",
+        "Merchant": "fraud_Rippin-VonRueden",
+        "Amount": "$29.15",
+        "Category": "health_fitness"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14884km > 500km)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.2024",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_6fce649b-cfd7-4373-8467-0b75797e09e5",
+        "Date/Time": "2023-12-18 14:40:28",
+        "Merchant": "fraud_Lehner, Reichert and Mills",
+        "Amount": "$2.08",
+        "Category": "misc_pos"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14719km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (6 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.1863",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_3507d9b9-34a8-438e-bea7-20a48a4573eb",
+        "Date/Time": "2023-12-18 14:48:12",
+        "Merchant": "fraud_Hamill-D'Amore",
+        "Amount": "$46.18",
+        "Category": "health_fitness"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14526km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (7 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.1044",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_479bdbce-1111-4bf8-aba3-ec64826a8d0f",
+        "Date/Time": "2023-12-18 18:50:02",
+        "Merchant": "fraud_Goldner, Kovacek and Abbott",
+        "Amount": "$63.54",
+        "Category": "grocery_pos"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14905km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (7 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.1680",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_4ed9b2a5-7d1c-4246-a8b6-689111620db0",
+        "Date/Time": "2023-12-18 22:57:22",
+        "Merchant": "fraud_Champlin-Casper",
+        "Amount": "$208.59",
+        "Category": "home"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (15179km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (7 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.0372",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_4788dc99-1b30-45af-b863-bf3b83e182b2",
+        "Date/Time": "2023-12-19 02:04:30",
+        "Merchant": "fraud_Hettinger, McCullough and Fay",
+        "Amount": "$19.33",
+        "Category": "home"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14160km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (8 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.1402",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_72044ee4-bdf4-4eaa-908b-50706c7e5cac",
+        "Date/Time": "2023-12-18 03:02:25",
+        "Merchant": "fraud_Bode-Rempel",
+        "Amount": "$123.64",
+        "Category": "kids_pets"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (13976km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (7 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.1165",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_af83ccba-7bd9-43b8-a52d-16c9151c6116",
+        "Date/Time": "2023-12-17 06:10:44",
+        "Merchant": "fraud_Friesen-Ortiz",
+        "Amount": "$23.19",
+        "Category": "personal_care"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (15044km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (8 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.2030",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_e22deaaa-0200-4056-ad7c-c3bf0fcb0c09",
+        "Date/Time": "2023-12-19 12:16:40",
+        "Merchant": "fraud_Lind, Huel and McClure",
+        "Amount": "$63.52",
+        "Category": "gas_transport"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14025km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (7 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.1708",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_a12033fa-2262-499a-85b1-e7b887144fed",
+        "Date/Time": "2023-12-19 07:34:43",
+        "Merchant": "fraud_Heidenreich PLC",
+        "Amount": "$142.12",
+        "Category": "grocery_pos"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14145km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (8 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.0881",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_e3af0a7c-b1cb-4c87-830a-a46f3e591873",
+        "Date/Time": "2023-12-19 22:05:04",
+        "Merchant": "fraud_Conroy-Cruickshank",
+        "Amount": "$42.86",
+        "Category": "gas_transport"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14981km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (7 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.1775",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_1faa7c76-e36c-416a-8d6a-e04c3c71f42e",
+        "Date/Time": "2023-12-19 18:57:25",
+        "Merchant": "fraud_Weber, Thiel and Hammes",
+        "Amount": "$44.39",
+        "Category": "kids_pets"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (15315km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (6 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.1650",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_05b0d9c7-8b2b-44cc-9f94-c76d354976b4",
+        "Date/Time": "2023-12-20 07:20:12",
+        "Merchant": "fraud_Block-Hauck",
+        "Amount": "$3.12",
+        "Category": "travel"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14119km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (7 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.1582",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_17e55202-c1f5-40ac-a519-f0af28cd1d9e",
+        "Date/Time": "2023-12-20 08:59:00",
+        "Merchant": "fraud_Roob, Conn and Tremblay",
+        "Amount": "$2.38",
+        "Category": "shopping_pos"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (15621km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (7 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.0943",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_3d97869e-f9ce-40a1-a7eb-1b7ac32562be",
+        "Date/Time": "2023-12-20 13:35:42",
+        "Merchant": "fraud_Parker-Kunde",
+        "Amount": "$30.89",
+        "Category": "personal_care"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14222km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (7 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.2205",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_e71f4e4e-cf51-403e-810a-b4fa3548bdce",
+        "Date/Time": "2023-12-20 02:51:32",
+        "Merchant": "fraud_Gibson-Deckow",
+        "Amount": "$19.61",
+        "Category": "entertainment"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14643km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (6 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.0920",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_f2e69515-255e-47de-b8a8-2d4133c5d55b",
+        "Date/Time": "2023-12-20 15:24:35",
+        "Merchant": "fraud_Beier LLC",
+        "Amount": "$94.74",
+        "Category": "entertainment"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14927km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (7 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.1629",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_2c1234cc-87d9-4b66-b6ca-e11ff499c1a2",
+        "Date/Time": "2023-12-20 15:44:51",
+        "Merchant": "fraud_Rau-Grant",
+        "Amount": "$53.23",
+        "Category": "kids_pets"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14319km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (8 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.1623",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_2609143a-eca4-4b11-abe6-063f887316c6",
+        "Date/Time": "2023-12-20 20:12:47",
+        "Merchant": "fraud_Herman Inc",
+        "Amount": "$69.22",
+        "Category": "misc_pos"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (15497km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (8 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.1120",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_9ba752f9-4ed6-4399-bb1a-6238710df5c5",
+        "Date/Time": "2023-12-20 23:02:12",
+        "Merchant": "fraud_Langworth LLC",
+        "Amount": "$8.48",
+        "Category": "personal_care"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14568km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (8 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.1960",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_5f023fa7-6434-4c50-882d-7cb6c2727dbe",
+        "Date/Time": "2023-12-21 02:39:44",
+        "Merchant": "fraud_Gottlieb Group",
+        "Amount": "$53.32",
+        "Category": "kids_pets"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14818km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (10 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.1831",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_585eb026-e8a0-4bca-ba44-a89765657c23",
+        "Date/Time": "2023-12-21 03:02:55",
+        "Merchant": "fraud_Friesen-Ortiz",
+        "Amount": "$5.11",
+        "Category": "personal_care"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14865km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (10 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.1459",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_fc85f072-39b2-479b-ab88-70de5f37938c",
+        "Date/Time": "2023-12-21 05:54:56",
+        "Merchant": "fraud_Rau-Robel",
+        "Amount": "$36.35",
+        "Category": "kids_pets"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14805km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (11 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.2005",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_5c8529bf-402d-49ca-8214-5caf807cc792",
+        "Date/Time": "2023-12-18 08:43:41",
+        "Merchant": "fraud_Lesch Ltd",
+        "Amount": "$5.13",
+        "Category": "shopping_pos"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14808km > 500km)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.2169",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_582b1350-154d-4939-bd8b-3b074fc63f9c",
+        "Date/Time": "2023-12-21 09:10:34",
+        "Merchant": "fraud_Pacocha-Bauch",
+        "Amount": "$165.88",
+        "Category": "shopping_pos"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (15049km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (10 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.0827",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_b7edd9fe-6837-41b7-b0cf-9e5f9ec4e012",
+        "Date/Time": "2023-12-21 13:49:08",
+        "Merchant": "fraud_Becker, Harris and Harvey",
+        "Amount": "$1.45",
+        "Category": "personal_care"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14758km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (10 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.1883",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_b1a0cef3-6041-4b2f-8a8f-3b81abca3610",
+        "Date/Time": "2023-12-21 18:57:15",
+        "Merchant": "fraud_Haley, Batz and Auer",
+        "Amount": "$12.32",
+        "Category": "health_fitness"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14715km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (10 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.1965",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_845b0f3b-629b-42ee-aa7c-336ca91ab951",
+        "Date/Time": "2023-12-21 15:26:24",
+        "Merchant": "fraud_Hirthe-Beier",
+        "Amount": "$9.28",
+        "Category": "health_fitness"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14866km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (10 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.1882",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_20ecbcd9-da2c-459d-8bfe-291fb59a7d31",
+        "Date/Time": "2023-12-21 23:33:29",
+        "Merchant": "fraud_Erdman-Durgan",
+        "Amount": "$21.50",
+        "Category": "health_fitness"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14975km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (10 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.0640",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_4d45bd6f-2b1f-4217-ab6e-117f142fad6e",
+        "Date/Time": "2023-12-22 03:04:58",
+        "Merchant": "fraud_Hoppe-Parisian",
+        "Amount": "$24.63",
+        "Category": "kids_pets"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14875km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (8 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.2040",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_256d0bbc-31bc-4e57-80a6-d16a2f8f7671",
+        "Date/Time": "2023-12-22 04:10:58",
+        "Merchant": "fraud_Kertzmann LLC",
+        "Amount": "$72.97",
+        "Category": "health_fitness"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (15375km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (9 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.1281",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_71ace367-fbc8-46c4-ba4a-0b4270a674e3",
+        "Date/Time": "2023-12-21 20:06:21",
+        "Merchant": "fraud_Windler LLC",
+        "Amount": "$197.11",
+        "Category": "kids_pets"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (13915km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (11 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.0002",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_1f2fb3a4-7206-4f56-83b3-214520c2ce43",
+        "Date/Time": "2023-12-22 06:03:40",
+        "Merchant": "fraud_Powlowski-Weimann",
+        "Amount": "$7.49",
+        "Category": "food_dining"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14840km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (10 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.2046",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_e33024f6-24fe-4584-9162-990d956f9806",
+        "Date/Time": "2023-12-22 09:31:31",
+        "Merchant": "fraud_Swaniawski, Nitzsche and Welch",
+        "Amount": "$42.70",
+        "Category": "health_fitness"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14937km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (10 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.2089",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_4fd2a671-1df6-43d1-97dd-f4a77244eecb",
+        "Date/Time": "2023-12-22 11:58:59",
+        "Merchant": "fraud_Boyer PLC",
+        "Amount": "$21.39",
+        "Category": "misc_pos"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14647km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (11 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.1634",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_8ce247e6-0284-45cf-9872-172c420cef68",
+        "Date/Time": "2023-12-22 12:42:04",
+        "Merchant": "fraud_Kautzer and Sons",
+        "Amount": "$6.20",
+        "Category": "personal_care"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14189km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (12 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.2084",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_926bc034-898e-46b7-ad0b-8ad2f24077e2",
+        "Date/Time": "2023-12-22 16:51:55",
+        "Merchant": "fraud_Lemke-Gutmann",
+        "Amount": "$13.72",
+        "Category": "shopping_net"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14507km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (11 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.2110",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_55a67fcb-74aa-4f1c-a2b0-b370ca435582",
+        "Date/Time": "2023-12-22 18:39:42",
+        "Merchant": "fraud_Prosacco, Kreiger and Kovacek",
+        "Amount": "$87.21",
+        "Category": "home"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14643km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (12 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.0710",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_e33217cb-764d-495e-9611-c3ebd3b13d35",
+        "Date/Time": "2023-12-22 19:03:04",
+        "Merchant": "fraud_Zboncak LLC",
+        "Amount": "$50.87",
+        "Category": "food_dining"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14705km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (12 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.0994",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_30254d9e-f46d-4b4a-a272-00d020f10cf2",
+        "Date/Time": "2023-12-22 05:53:42",
+        "Merchant": "fraud_Lehner, Reichert and Mills",
+        "Amount": "$70.94",
+        "Category": "misc_pos"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14141km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (10 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.1826",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_2c9965fc-29f9-439d-986c-9accf5a6f53e",
+        "Date/Time": "2023-12-22 19:47:20",
+        "Merchant": "fraud_Goldner-Lemke",
+        "Amount": "$12.95",
+        "Category": "entertainment"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14575km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (13 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.2097",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_f12cd290-3fee-481c-8147-88f0bd688d56",
+        "Date/Time": "2023-12-23 00:39:18",
+        "Merchant": "fraud_Kerluke, Considine and Macejkovic",
+        "Amount": "$5.37",
+        "Category": "misc_net"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14808km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (12 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.2081",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_fb4d160f-d27e-4e4b-85a6-9b30f26113cb",
+        "Date/Time": "2023-12-23 07:36:36",
+        "Merchant": "fraud_Schaefer Ltd",
+        "Amount": "$2.73",
+        "Category": "kids_pets"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14656km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (10 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.2135",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_f1837d0e-1d25-4614-8f08-514c5d006181",
+        "Date/Time": "2023-12-23 05:00:29",
+        "Merchant": "fraud_Reinger, Weissnat and Strosin",
+        "Amount": "$9.56",
+        "Category": "food_dining"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14077km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (11 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.1932",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_f78387aa-7a0e-4216-bef5-1e828f042aa4",
+        "Date/Time": "2023-12-23 11:21:14",
+        "Merchant": "fraud_Torphy-Kertzmann",
+        "Amount": "$28.63",
+        "Category": "health_fitness"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (13796km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (11 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.1148",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_9e0bb330-b8ac-4495-8e4a-47899639e01b",
+        "Date/Time": "2023-12-23 14:40:32",
+        "Merchant": "fraud_Goyette-Gerhold",
+        "Amount": "$42.77",
+        "Category": "kids_pets"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14094km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (10 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.0175",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_3b37b08b-df4c-4600-b7ec-2dc4dce6acac",
+        "Date/Time": "2023-12-23 16:38:42",
+        "Merchant": "fraud_Mueller, Gerhold and Mueller",
+        "Amount": "$6.11",
+        "Category": "health_fitness"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (13994km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (11 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.1569",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_49a73374-fcac-4e27-9f47-c7729e9d8f1f",
+        "Date/Time": "2023-12-23 08:11:29",
+        "Merchant": "fraud_Mayert Group",
+        "Amount": "$2.65",
+        "Category": "shopping_pos"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (15307km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (11 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.0776",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_8d127eb9-3cc3-4e36-941e-881a285e343c",
+        "Date/Time": "2023-12-23 20:08:58",
+        "Merchant": "fraud_Haag-Blanda",
+        "Amount": "$4.79",
+        "Category": "food_dining"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14769km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (8 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.2128",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_a9df3791-94aa-43aa-abab-6e05c9d85203",
+        "Date/Time": "2023-12-24 00:51:07",
+        "Merchant": "fraud_Kuhn LLC",
+        "Amount": "$8.08",
+        "Category": "misc_net"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (15033km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (8 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.1944",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_93dd5fe3-2d84-4466-b8cf-93d4f57e91d4",
+        "Date/Time": "2023-12-24 05:13:45",
+        "Merchant": "fraud_Kris-Kertzmann",
+        "Amount": "$2.27",
+        "Category": "travel"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14901km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (8 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.1740",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_e8ac6e1f-6e7b-49b3-a187-3d588381e2ab",
+        "Date/Time": "2023-12-24 05:34:11",
+        "Merchant": "fraud_Durgan, Gislason and Spencer",
+        "Amount": "$129.01",
+        "Category": "home"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (15436km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (9 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.0843",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_5ad177ac-5022-4548-a7de-a5f664d59a9c",
+        "Date/Time": "2023-12-24 11:43:56",
+        "Merchant": "fraud_Lockman, West and Runte",
+        "Amount": "$108.59",
+        "Category": "grocery_pos"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (15048km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (8 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.0742",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_9c0585d4-581b-4319-b186-fd6fe1c29491",
+        "Date/Time": "2023-12-24 16:29:11",
+        "Merchant": "fraud_Gibson-Deckow",
+        "Amount": "$22.36",
+        "Category": "entertainment"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (15114km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (8 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.1310",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_05095e29-4013-439f-8ad3-f13c8491c0e0",
+        "Date/Time": "2023-12-24 17:41:02",
+        "Merchant": "fraud_Fadel Inc",
+        "Amount": "$15.86",
+        "Category": "health_fitness"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14925km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (8 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.1823",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    },
+    {
+      "status": "\u2705 LEGITIMATE",
+      "details": {
+        "Transaction ID": "sim_ed3e3bfc-6af1-4ca7-9e62-f6f152d16b4e",
+        "Date/Time": "2023-12-24 22:38:28",
+        "Merchant": "fraud_McKenzie-Huels",
+        "Amount": "$11.16",
+        "Category": "food_dining"
+      },
+      "signals": {
+        "Rule Violations": "RULE_VIOLATION:LOCATION_FAR_FROM_HOME (14394km > 500km); RULE_VIOLATION:HIGH_VELOCITY_RECENT_ACCOUNT (8 trans in 24h > 5)",
+        "Rules Triggered": "Yes",
+        "Anomaly": "No",
+        "Anomaly Score": "0.2199",
+        "ML Fraud Prediction": "No",
+        "Fraud Probability": "0.00%",
+        "Overall Risk Level": "Low",
+        "Risk Score": "0.3000"
+      },
+      "additional": {
+        "Actual Fraud": "No"
+      }
+    }
+  ]
+}
