@@ -57,7 +57,8 @@ def load_data(input_file):
 def format_transaction(row, threshold):
     """Format a single transaction for the report."""
     # Determine transaction status based on risk score or risk level
-    status = "🚨 SUSPICIOUS" if row.get('risk_score', 0) >= threshold or row.get('risk_level') == 'High' else "✅ LEGITIMATE"
+    # Using text instead of emoji to avoid encoding issues
+    status = "! SUSPICIOUS" if row.get('risk_score', 0) >= threshold or row.get('risk_level') == 'High' else "✓ LEGITIMATE"
     
     # Format timestamp
     timestamp = row.get('trans_date_trans_time', 'Unknown Date/Time')
@@ -114,7 +115,7 @@ def generate_text_report(transactions, threshold):
     report.append("")
     
     # Count suspicious transactions
-    suspicious_count = sum(1 for data in transactions if data['status'].startswith("🚨"))
+    suspicious_count = sum(1 for data in transactions if data['status'].startswith("! "))
     report.append(f"Summary: {suspicious_count} suspicious transactions out of {len(transactions)} total")
     report.append("")
     
@@ -169,11 +170,20 @@ def main():
     try:
         output_path = Path(args.output)
         output_path.parent.mkdir(parents=True, exist_ok=True)
-        with open(output_path, 'w') as f:
+        with open(output_path, 'w', encoding='utf-8') as f:
             f.write(text_report)
         print(f"Text report saved to {output_path}")
     except Exception as e:
         print(f"Error saving text report: {e}", file=sys.stderr)
+        # Fallback to ASCII-only version if UTF-8 fails
+        try:
+            # Replace any non-ASCII characters
+            ascii_report = text_report.encode('ascii', 'replace').decode('ascii')
+            with open(output_path, 'w', encoding='ascii') as f:
+                f.write(ascii_report)
+            print(f"ASCII-only version of the report saved as fallback")
+        except Exception as e2:
+            print(f"Error saving ASCII fallback report: {e2}", file=sys.stderr)
     
     # Save JSON report
     try:
@@ -184,12 +194,12 @@ def main():
         json_report = {
             "report_date": datetime.now().isoformat(),
             "total_transactions": len(formatted_transactions),
-            "suspicious_count": sum(1 for data in formatted_transactions if data['status'].startswith("🚨")),
+            "suspicious_count": sum(1 for data in formatted_transactions if data['status'].startswith("! ")),
             "transactions": formatted_transactions
         }
         
-        with open(json_path, 'w') as f:
-            json.dump(json_report, f, indent=2)
+        with open(json_path, 'w', encoding='utf-8') as f:
+            json.dump(json_report, f, indent=2, ensure_ascii=False)
         print(f"JSON report saved to {json_path}")
     except Exception as e:
         print(f"Error saving JSON report: {e}", file=sys.stderr)
