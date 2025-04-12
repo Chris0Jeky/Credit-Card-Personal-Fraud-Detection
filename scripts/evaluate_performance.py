@@ -103,25 +103,59 @@ def main():
         if 'is_fraud' not in flags_df.columns:
             raise ValueError("'is_fraud' column missing in flagged transactions.")
 
-        # Merge data - Use transaction number as key
-        if 'trans_num' not in flags_df.columns or 'trans_num' not in pca_df.columns or 'trans_num' not in rf_df.columns:
-             print("Warning: 'trans_num' missing in one or more files. Merging by index.")
-             # Potential issue if rows aren't perfectly aligned across files
-             eval_df = pd.concat([
-                flags_df[['is_fraud', 'rule_triggered']].reset_index(drop=True), # Ensure 'rule_triggered' exists
-                pca_df[['anomaly', 'anomaly_score']].reset_index(drop=True),
-                rf_df[['predicted_fraud', 'fraud_probability']].reset_index(drop=True)
-             ], axis=1)
+        # --- Merge Data ---
+        print("Merging results for evaluation...")
+        if 'trans_num' not in flags_df.columns:
+            print("CRITICAL Error: 'trans_num' missing in flagged transactions file. Cannot merge for evaluation.", file=sys.stderr)
+            sys.exit(1)
+
+        # Start with the core flagged data (contains ground truth)
+        eval_df = flags_df[['trans_num', 'is_fraud', 'rule_triggered']].copy()
+
+        # Left merge PCA results if available
+        if pca_df is not None and 'trans_num' in pca_df.columns:
+            eval_df = eval_df.merge(
+                pca_df[['trans_num', 'anomaly', 'anomaly_score']],
+                on='trans_num', how='left'
+            )
+            print(f"   Merged PCA results. Shape after merge: {eval_df.shape}")
         else:
-             eval_df = flags_df[['trans_num', 'is_fraud', 'rule_triggered']].merge(
-                pca_df[['trans_num', 'anomaly', 'anomaly_score']], on='trans_num', how='inner'
-             ).merge(
-                rf_df[['trans_num', 'predicted_fraud', 'fraud_probability']], on='trans_num', how='inner'
-             )
-             if integrated_df is not None and 'trans_num' in integrated_df.columns:
-                 eval_df = eval_df.merge(
-                     integrated_df[['trans_num', 'risk_score', 'risk_level']], on='trans_num', how='inner'
-                 )
+            print("   PCA results missing or lack 'trans_num'. Skipping PCA merge.")
+            eval_df['anomaly'] = 0 # Add placeholder columns if missing
+            eval_df['anomaly_score'] = 0.0
+
+        # Left merge RF results if available
+        if rf_df is not None and 'trans_num' in rf_df.columns:
+            eval_df = eval_df.merge(
+                rf_df[['trans_num', 'predicted_fraud', 'fraud_probability']],
+                on='trans_num', how='left'
+            )
+            print(f"   Merged RF results. Shape after merge: {eval_df.shape}")
+        else:
+            print("   RF results missing or lack 'trans_num'. Skipping RF merge.")
+            eval_df['predicted_fraud'] = 0 # Add placeholder columns if missing
+            eval_df['fraud_probability'] = 0.0
+
+        # Left merge Integrated results if available
+        if integrated_df is not None and 'trans_num' in integrated_df.columns:
+            eval_df = eval_df.merge(
+                integrated_df[['trans_num', 'risk_score', 'risk_level']],
+                on='trans_num', how='left'
+            )
+            print(f"   Merged Integrated results. Shape after merge: {eval_df.shape}")
+        else:
+            print("   Integrated results missing or lack 'trans_num'. Skipping Integrated merge.")
+            # Placeholders aren't strictly needed unless used later, but good practice:
+            eval_df['risk_score'] = 0.0
+            eval_df['risk_level'] = 'Low'
+
+        # Fill any NaNs potentially introduced by left merges (e.g., if a trans_num was in flags but not ML output)
+        eval_df.fillna({
+            'rule_triggered': 0,
+            'anomaly': 0, 'anomaly_score': 0.0,
+            'predicted_fraud': 0, 'fraud_probability': 0.0,
+            'risk_score': 0.0, 'risk_level': 'Low'
+        }, inplace=True)
 
         print(f"   Successfully loaded and merged data for {len(eval_df)} transactions.")
 
@@ -134,7 +168,18 @@ def main():
         sys.exit(1)
 
     # --- Evaluate Components ---
-    y_true = eval_df['is_fraud']
+    # Crucial Check: Ensure y_true has valid values AFTER merge
+    eval_df.dropna(subset=['is_fraud'], inplace=True) # Drop rows where ground truth is missing
+    y_true = eval_df['is_fraud'].astype(int) # Ensure integer type
+
+    if eval_df.empty or y_true.empty:
+        print("Error: No valid transactions remaining after merging and cleaning for evaluation.", file=sys.stderr)
+        sys.exit(1)
+    if not np.all(np.isin(y_true.unique(), [0, 1])):
+        print(f"Error: Unexpected values found in y_true (is_fraud): {y_true.unique()}. Expected 0 or 1.", file=sys.stderr)
+        sys.exit(1)
+
+    print(f"   Final evaluation data ready for {len(eval_df)} transactions.")
 
     # 1. Rule-Based System
     print("\nEvaluating Rule-Based System...")
