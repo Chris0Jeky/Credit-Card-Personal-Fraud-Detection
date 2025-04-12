@@ -123,8 +123,23 @@ def fit_or_load_transformers(X, force_train=False):
         try:
             scaler = joblib.load(SCALER_FILE)
             pca = joblib.load(PCA_FILE)
-            print("   Transformers loaded successfully.")
-            return scaler, pca, False # Indicate transformers were loaded
+            
+            # Check for feature name mismatch before using the scaler
+            if hasattr(scaler, 'feature_names_in_') and not set(X.columns).issubset(set(scaler.feature_names_in_)):
+                missing_features = set(X.columns) - set(scaler.feature_names_in_)
+                extra_features = set(scaler.feature_names_in_) - set(X.columns)
+                
+                err_msg = "Feature name mismatch between current data and saved scaler."
+                if missing_features:
+                    err_msg += f" Features in current data not seen during fit: {missing_features}."
+                if extra_features:
+                    err_msg += f" Features missing from current data: {extra_features}."
+                
+                print(f"Warning: {err_msg} Training new transformers.")
+                train_needed = True
+            else:
+                print("   Transformers loaded successfully.")
+                return scaler, pca, False # Indicate transformers were loaded
         except Exception as e:
             print(f"Warning: Error loading existing transformers: {e}. Training new ones.")
             train_needed = True
@@ -231,12 +246,15 @@ def main():
     X, original_data_ids = preprocess_data(transactions_df) # Get IDs/target back
 
     # Fit/load transformers and transform data
-    scaler, pca, _ = fit_or_load_transformers(X) # Ignore 'trained' flag for now
+    # Set force_train=True to always train new models when running the pipeline
+    # This avoids feature mismatch issues between runs
+    scaler, pca, trained_new = fit_or_load_transformers(X, force_train=True)
     X_scaled = scaler.transform(X)
     X_pca = pca.transform(X_scaled)
 
     # Fit/load and apply model
-    model = fit_or_load_model(X_pca)
+    # If we trained new transformers, also train a new model for consistency
+    model = fit_or_load_model(X_pca, force_train=trained_new)
     results_df = predict_anomalies(model, X_pca, original_data_ids) # Pass IDs/target
 
     # Merge results back with original transaction details for context (Optional but good)
