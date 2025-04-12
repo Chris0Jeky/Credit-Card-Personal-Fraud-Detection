@@ -2,53 +2,53 @@
     "rules": {
         "confusion_matrix": {
             "tn": 0,
-            "fp": 75,
+            "fp": 991,
             "fn": 0,
-            "tp": 0
+            "tp": 9
         },
-        "accuracy": 0.0,
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1_score": 0.0,
+        "accuracy": 0.009,
+        "precision": 0.009,
+        "recall": 1.0,
+        "f1_score": 0.0178,
         "auprc": null
     },
     "pca_isolation_forest": {
         "confusion_matrix": {
-            "tn": 71,
-            "fp": 4,
-            "fn": 0,
-            "tp": 0
+            "tn": 946,
+            "fp": 45,
+            "fn": 4,
+            "tp": 5
         },
-        "accuracy": 0.9467,
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1_score": 0.0,
-        "auprc": 0.5
+        "accuracy": 0.951,
+        "precision": 0.1,
+        "recall": 0.5556,
+        "f1_score": 0.1695,
+        "auprc": 0.1354
     },
     "random_forest": {
         "confusion_matrix": {
-            "tn": 75,
+            "tn": 991,
             "fp": 0,
             "fn": 0,
-            "tp": 0
+            "tp": 9
         },
         "accuracy": 1.0,
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1_score": 0.0,
-        "auprc": 0.5
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "auprc": 1.0
     },
     "integrated_score": {
         "confusion_matrix": {
-            "tn": 75,
+            "tn": 991,
             "fp": 0,
-            "fn": 0,
-            "tp": 0
+            "fn": 5,
+            "tp": 4
         },
-        "accuracy": 1.0,
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1_score": 0.0,
-        "auprc": 0.5
+        "accuracy": 0.995,
+        "precision": 1.0,
+        "recall": 0.4444,
+        "f1_score": 0.6154,
+        "auprc": 0.9222
     }
 }
