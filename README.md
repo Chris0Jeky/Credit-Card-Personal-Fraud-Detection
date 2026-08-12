@@ -86,6 +86,15 @@ The pipeline generates several output files in the `data/simulation_output/` dir
 
 *   `scripts/integrate_results.py`: Combines signals from `rule_triggered`, `anomaly_score`, and `fraud_probability` into a weighted `risk_score` and assigns a `risk_level` (Low, Medium, High).
 
+## License
+
+The owner-authored Python source code and documentation are licensed under GNU
+GPL version 3 only (`GPL-3.0-only`). See `LICENSE` and `LICENSING.md`.
+
+The GPL grant does **not** cover `Datasets/**`, `data/**`, or
+`models/trained_models/**`. Those paths contain placeholders, generated outputs,
+or model artefacts whose upstream dataset rights have not been established.
+
 ### Performance Evaluation
 
 *   `scripts/evaluate_performance.py`: Compares predictions (Rules, PCA/IF, RF, Integrated) against the `is_fraud` ground truth. Calculates metrics like Precision, Recall, F1-Score, Accuracy, and AUPRC. Outputs `evaluation_report.json`. Optionally plots PR curves.
