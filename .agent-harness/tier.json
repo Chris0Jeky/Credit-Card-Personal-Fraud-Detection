@@ -1,0 +1,17 @@
+{
+  "tier": 1,
+  "name": "sandbox",
+  "authority": {
+    "push": "free",
+    "merge": "free"
+  },
+  "flags": {
+    "sensitive_data": false,
+    "wave_mode": false,
+    "dormant_production": false,
+    "relaxed_work_loss_guards": false
+  },
+  "human_todo": null,
+  "last_reviewed": "2026-10-07",
+  "notes": "Owner decision 2026-10-07 (estate-hub session): T1. No production signals measured (description: not production fraud detection). Dataset provenance and licence are an open owner question (#2)."
+}
