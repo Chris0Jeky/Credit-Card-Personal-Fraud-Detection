@@ -15,6 +15,7 @@ import joblib
 import os
 from geopy.distance import geodesic
 import json
+from scripts.prediction_inputs import simulation_digest, write_provenance
 
 # --- Configuration ---
 MODEL_DIR = Path(__file__).parent
@@ -210,6 +211,7 @@ def main():
         input_file = Path(sys.argv[1])
     else:
         input_file = DEFAULT_INPUT_FILE
+    source_digest = simulation_digest(input_file)
     
     # Load data
     transactions_df = load_data(input_file)
@@ -262,6 +264,7 @@ def main():
     
     # Save results
     results_df.to_csv(RESULTS_FILE, index=False)
+    write_provenance(RESULTS_FILE, source_digest)
     print(f"\nResults saved to {RESULTS_FILE}\n")
     
     # Print top potential fraud transactions

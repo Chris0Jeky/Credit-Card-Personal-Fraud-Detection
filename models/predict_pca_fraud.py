@@ -31,6 +31,7 @@ from sklearn.decomposition import PCA
 from sklearn.ensemble import IsolationForest
 import joblib
 import os
+from scripts.prediction_inputs import simulation_digest, write_provenance
 
 # Import configuration
 try:
@@ -240,6 +241,7 @@ def main():
     """Main execution function."""
     print("\n=== Starting PCA-based Anomaly Detection (Isolation Forest) ===")
     print("NOTE: Transformers and Model are trained on the current simulation run.")
+    source_digest = simulation_digest(INPUT_FILE)
 
     # Load and preprocess data
     transactions_df = load_data(INPUT_FILE)
@@ -262,6 +264,7 @@ def main():
 
     # Save results
     final_results_df.to_csv(RESULTS_FILE, index=False, float_format='%.6f')
+    write_provenance(RESULTS_FILE, source_digest)
     print(f"\nResults saved to {RESULTS_FILE}\n")
 
     # Print top anomalies with transaction info
