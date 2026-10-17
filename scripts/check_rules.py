@@ -6,6 +6,7 @@ from pathlib import Path
 from geopy.distance import geodesic
 from datetime import datetime, timedelta
 import sys
+from scripts.prediction_inputs import simulation_digest, write_provenance
 
 # Import configuration
 try:
@@ -123,6 +124,7 @@ def check_transaction_rules(transaction_row, account_details, recent_transaction
 def main():
     """Main rule checking logic."""
     print("--- Starting Rule-Based Checks ---")
+    source_digest = simulation_digest(TRANSACTIONS_FILE)
 
     # 1. Load simulated account details
     print(f"Loading account details from {ACCOUNT_DETAILS_FILE}...")
@@ -200,6 +202,7 @@ def main():
         results_df = results_df.drop(columns=['trans_ts'])
 
     results_df.to_csv(RESULTS_OUTPUT_FILE, index=False)
+    write_provenance(RESULTS_OUTPUT_FILE, source_digest)
     print(f"Results with flags saved to {RESULTS_OUTPUT_FILE}")
 
     print("--- Rule Checking Complete ---")

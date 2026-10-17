@@ -24,6 +24,7 @@ from sklearn.metrics import (
 import matplotlib.pyplot as plt
 import seaborn as sns
 import argparse
+from scripts.prediction_inputs import load_prediction_inputs, validate_rows, verify_provenance
 
 # Import configuration
 try:
@@ -91,72 +92,41 @@ def main():
     # --- Load Data ---
     print("Loading prediction files...")
     try:
-        flags_df = pd.read_csv(config.FLAGGED_TRANSACTIONS_FILE)
-        pca_df = pd.read_csv(config.PCA_PREDICTIONS_FILE)
-        rf_df = pd.read_csv(config.RF_PREDICTIONS_FILE)
+        flags_df, pca_df, rf_df, source_digest = load_prediction_inputs()
         # Optional: Load integrated results if they exist
         integrated_df = None
         if config.INTEGRATED_ASSESSMENT_FILE.exists():
-            integrated_df = pd.read_csv(config.INTEGRATED_ASSESSMENT_FILE)
+            integrated_df = pd.read_csv(config.INTEGRATED_ASSESSMENT_FILE, dtype={'trans_num': str})
+            validate_rows(integrated_df, 'Integrated', set(flags_df['trans_num']), ('risk_score',))
+            if 'risk_level' not in integrated_df.columns or not integrated_df['risk_level'].isin(['Low', 'Medium', 'High']).all():
+                raise ValueError('Integrated: missing or invalid risk_level.')
+            verify_provenance(config.INTEGRATED_ASSESSMENT_FILE, source_digest)
             print("   Loaded integrated assessment results.")
-
-        # Basic check: Ensure ground truth 'is_fraud' exists
-        if 'is_fraud' not in flags_df.columns:
-            raise ValueError("'is_fraud' column missing in flagged transactions.")
 
         # --- Merge Data ---
         print("Merging results for evaluation...")
-        if 'trans_num' not in flags_df.columns:
-            print("CRITICAL Error: 'trans_num' missing in flagged transactions file. Cannot merge for evaluation.", file=sys.stderr)
-            sys.exit(1)
 
         # Start with the core flagged data (contains ground truth)
         eval_df = flags_df[['trans_num', 'is_fraud', 'rule_triggered']].copy()
 
-        # Left merge PCA results if available
-        if pca_df is not None and 'trans_num' in pca_df.columns:
-            eval_df = eval_df.merge(
-                pca_df[['trans_num', 'anomaly', 'anomaly_score']],
-                on='trans_num', how='left'
-            )
-            print(f"   Merged PCA results. Shape after merge: {eval_df.shape}")
-        else:
-            print("   PCA results missing or lack 'trans_num'. Skipping PCA merge.")
-            eval_df['anomaly'] = 0 # Add placeholder columns if missing
-            eval_df['anomaly_score'] = 0.0
-
-        # Left merge RF results if available
-        if rf_df is not None and 'trans_num' in rf_df.columns:
-            eval_df = eval_df.merge(
-                rf_df[['trans_num', 'predicted_fraud', 'fraud_probability']],
-                on='trans_num', how='left'
-            )
-            print(f"   Merged RF results. Shape after merge: {eval_df.shape}")
-        else:
-            print("   RF results missing or lack 'trans_num'. Skipping RF merge.")
-            eval_df['predicted_fraud'] = 0 # Add placeholder columns if missing
-            eval_df['fraud_probability'] = 0.0
+        eval_df = eval_df.merge(
+            pca_df[['trans_num', 'anomaly', 'anomaly_score']],
+            on='trans_num', how='left', validate='one_to_one'
+        )
+        eval_df = eval_df.merge(
+            rf_df[['trans_num', 'predicted_fraud', 'fraud_probability']],
+            on='trans_num', how='left', validate='one_to_one'
+        )
 
         # Left merge Integrated results if available
-        if integrated_df is not None and 'trans_num' in integrated_df.columns:
+        if integrated_df is not None:
             eval_df = eval_df.merge(
                 integrated_df[['trans_num', 'risk_score', 'risk_level']],
-                on='trans_num', how='left'
+                on='trans_num', how='left', validate='one_to_one'
             )
             print(f"   Merged Integrated results. Shape after merge: {eval_df.shape}")
         else:
-            print("   Integrated results missing or lack 'trans_num'. Skipping Integrated merge.")
-            # Placeholders aren't strictly needed unless used later, but good practice:
-            eval_df['risk_score'] = 0.0
-            eval_df['risk_level'] = 'Low'
-
-        # Fill any NaNs potentially introduced by left merges (e.g., if a trans_num was in flags but not ML output)
-        eval_df.fillna({
-            'rule_triggered': 0,
-            'anomaly': 0, 'anomaly_score': 0.0,
-            'predicted_fraud': 0, 'fraud_probability': 0.0,
-            'risk_score': 0.0, 'risk_level': 'Low'
-        }, inplace=True)
+            print("   Integrated results unavailable. Skipping integrated evaluation.")
 
         print(f"   Successfully loaded and merged data for {len(eval_df)} transactions.")
 

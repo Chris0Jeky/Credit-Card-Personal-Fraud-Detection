@@ -7,6 +7,7 @@ import pandas as pd
 import sys
 from pathlib import Path
 import numpy as np
+from scripts.prediction_inputs import load_prediction_inputs, write_provenance
 
 # Import configuration
 try:
@@ -55,22 +56,7 @@ def main():
     # --- Load Data ---
     print("Loading rule flags and ML predictions...")
     try:
-        flags_df = pd.read_csv(config.FLAGGED_TRANSACTIONS_FILE)
-        pca_df = pd.read_csv(config.PCA_PREDICTIONS_FILE)
-        rf_df = pd.read_csv(config.RF_PREDICTIONS_FILE)
-
-        # Check necessary columns
-        required_flag_cols = ['trans_num', 'rule_triggered', 'is_fraud']  # Assuming rule_triggered added
-        required_pca_cols = ['trans_num', 'anomaly_score']
-        required_rf_cols = ['trans_num', 'fraud_probability']
-
-        if not all(col in flags_df.columns for col in required_flag_cols):
-            raise ValueError(
-                f"Flagged data missing required columns ({required_flag_cols}). Did check_rules run correctly and add 'rule_triggered'?")
-        if not all(col in pca_df.columns for col in required_pca_cols):
-            raise ValueError(f"PCA data missing required columns ({required_pca_cols}).")
-        if not all(col in rf_df.columns for col in required_rf_cols):
-            raise ValueError(f"RF data missing required columns ({required_rf_cols}).")
+        flags_df, pca_df, rf_df, source_digest = load_prediction_inputs()
 
         # --- Merge Data ---
         print("Merging results...")
@@ -81,19 +67,13 @@ def main():
 
         # Merge PCA results
         integrated_df = integrated_df.merge(
-            pca_df[['trans_num', 'anomaly', 'anomaly_score']], on='trans_num', how='left'
+            pca_df[['trans_num', 'anomaly', 'anomaly_score']], on='trans_num', how='left', validate='one_to_one'
         )
 
         # Merge RF results
         integrated_df = integrated_df.merge(
-            rf_df[['trans_num', 'predicted_fraud', 'fraud_probability']], on='trans_num', how='left'
+            rf_df[['trans_num', 'predicted_fraud', 'fraud_probability']], on='trans_num', how='left', validate='one_to_one'
         )
-
-        # Handle potential merge issues (if a transaction didn't make it through a model)
-        integrated_df.fillna({
-            'anomaly': 0, 'anomaly_score': 0.0,  # Assume non-anomalous if missing
-            'predicted_fraud': 0, 'fraud_probability': 0.0  # Assume non-fraud if missing
-        }, inplace=True)
 
         print(f"   Successfully merged data for {len(integrated_df)} transactions.")
 
@@ -119,9 +99,11 @@ def main():
     print(f"\nSaving integrated assessment to {config.INTEGRATED_ASSESSMENT_FILE}...")
     try:
         integrated_df.to_csv(config.INTEGRATED_ASSESSMENT_FILE, index=False, float_format='%.4f')
+        write_provenance(config.INTEGRATED_ASSESSMENT_FILE, source_digest)
         print("   Integrated assessment saved.")
     except Exception as e:
         print(f"Error saving integrated assessment: {e}", file=sys.stderr)
+        return 1
 
     print("--- Results Integration Complete ---")
     return 0
